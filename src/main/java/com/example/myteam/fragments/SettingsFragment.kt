@@ -1,0 +1,90 @@
+package com.example.myteam.fragments
+
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import com.example.myteam.R
+import com.example.myteam.activities.RegisterActivity
+import com.example.myteam.utilits.*
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.android.synthetic.main.fragment_settings.*
+
+//Фрагмент настроек
+class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
+
+    override fun onResume() {
+        super.onResume()
+        setHasOptionsMenu(true)
+        initFields()
+    }
+
+    //Инициализация для отображения данных
+    private fun initFields() {
+        settings_bio.text = USER.bio
+        settings_full_name.text = USER.fullname
+        settings_phone_number.text = USER.phone
+        settings_status.text = USER.state
+        settings_username.text = USER.username
+
+        //Переходы
+        settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
+        settings_btn_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
+        settings_change_photo.setOnClickListener { changePhotoUser() }
+
+        settings_user_photo.downloadAndSetImage(USER.photoUrl) //Фото юзера
+    }
+
+    //Изменение фото пользователя
+    private fun changePhotoUser() {
+        CropImage.activity()
+            .setAspectRatio(1, 1)    //Чтобы окно было пропорционально
+            .setRequestedSize(600, 600)  //Размер картинки
+            .setCropShape(CropImageView.CropShape.OVAL)   //Овальный кроппер
+            .start(APP_ACTIVITY, this)
+    }
+
+    //Создание выпадающего меню
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.settings_action_menu, menu)
+    }
+
+    //Слушатель выбора пунктов выпадающего меню
+    //Срабатывает когда кликаем по кнопке меню
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings_menu_exit -> {
+                AUTH.signOut()
+                APP_ACTIVITY.replaceActivity(RegisterActivity())
+            }
+            R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
+        }
+        return true
+    }
+
+    //Активность которая запускается для получения картинки для фото пользователя
+    //Перехват фото-активити
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
+            && resultCode == RESULT_OK && data != null
+        ) {  //Тогда нам нужен URI
+            val uri = CropImage.getActivityResult(data).uri
+            val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
+                .child(CURRENT_UID)
+            //Функции высшего порядка
+            putImageToStorage(uri, path) {
+                getUrlFromStorage(path) {
+                    putUrlToDatabase(it) {
+                        settings_user_photo.downloadAndSetImage(it)
+                        showToast(getString(R.string.toast_data_update))
+                        USER.photoUrl = it
+                        APP_ACTIVITY.mAppDrawer.updateHeader()
+                    }
+                }
+            }
+        }
+    }
+}
