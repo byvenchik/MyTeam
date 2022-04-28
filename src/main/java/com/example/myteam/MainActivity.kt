@@ -41,15 +41,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Функция инициализирует проверку разрешения на доступ к контактам
-    private fun initContacts() {
-        if (checkPermission(READ_CONTACTS)) {
-            //Для проверки корутины
-            val array = arrayOfNulls<Int>(9500000)
-            array.forEach { println(it) }
-        }
-    }
-
     //Функция инициализирует функциональность приложения
     private fun initFunc() {
         if (AUTH.currentUser != null) {
