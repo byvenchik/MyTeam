@@ -22,6 +22,12 @@ lateinit var USER: User
 //Ноды в Firebase
 const val NODE_USERS = "users"
 const val NODE_USERNAMES = "usernames"
+const val NODE_PHONES = "phones"
+
+//В ней отдельно будем хранить телефоны клиентов, так удобнее при загрузке контактов
+const val NODE_PHONES_CONTACTS = "phones_contacts"
+//Контакты, которые тоже пользуются приложением
+
 
 //Чилды в Firebase
 const val CHILD_ID = "id"
@@ -88,8 +94,8 @@ inline fun initUser(crossinline function: () -> Unit) {
 
 //Функция инициализирует проверку разрешения на доступ к контактам
 fun initContacts() {
-    /* Функция считывает контакты с телефонной книги, хаполняет массив arrayContacts моделями CommonModel */
-    if (checkPermission(READ_CONTACTS)){
+    //Функция считывает контакты с телефонной книги, хаполняет массив arrayContacts моделями CommonModel
+    if (checkPermission(READ_CONTACTS)) {
         var arrayContacts = arrayListOf<CommonModel>()
         val cursor = APP_ACTIVITY.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -101,16 +107,38 @@ fun initContacts() {
         //Для безопасного вызова курсора
         cursor?.let {
             //Цикл для считывания
-            while (it.moveToNext()){    //Пока есть следующие элементы, двигаемся дальше
+            while (it.moveToNext()) {    //Пока есть следующие элементы, двигаемся дальше
                 //Не читаются контакты было без orThrow
-                val fullName = it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
-                val phone = it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val fullName =
+                    it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
+                val phone =
+                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
                 val newModel = CommonModel()
                 newModel.fullname = fullName
-                newModel.phone = phone.replace(Regex("[\\s,-]"),"")
+                newModel.phone = phone.replace(Regex("[\\s,-]"), "")
+                //Убрал пробелы в номере, чтобы норм считывать для БД
                 arrayContacts.add(newModel)
             }
         }
         cursor?.close()
+        //Закончили считываение, запустим функцию для сравнения
+        updatePhonesToDatabase(arrayContacts)
     }
+}
+
+fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
+    //Считываем ноду и делаем одиночный запрос
+    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(AppValueEventListener {
+        //Проходим по всем номерам
+        it.children.forEach { snapshot ->
+            arrayContacts.forEach { contact ->
+                if (snapshot.key == contact.phone) {
+                    REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
+                        .child(snapshot.value.toString()).child(CHILD_ID)   //Уже значение
+                        .setValue(snapshot.value.toString())
+                        .addOnFailureListener { showToast(it.message.toString()) }
+                }
+            }
+        }
+    })
 }
