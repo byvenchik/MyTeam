@@ -1,8 +1,10 @@
 package com.example.myteam
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.example.myteam.activities.RegisterActivity
 import com.example.myteam.databinding.ActivityMainBinding
 import com.example.myteam.fragments.ChatFragment
@@ -23,9 +25,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
         APP_ACTIVITY = this //Ссылка на мейн
         initFirebase()
-        initUser{       //Запускается инициализация юзера, а потом запускается все приложение
+        //Запускается инициализация юзера, а потом запускается все приложение
+        initUser {
+            initContacts()
             initFields()
             initFunc()
+        }
+    }
+
+    //Функция инициализирует проверку разрешения на доступ к контактам
+    private fun initContacts() {
+        if (checkPermission(READ_CONTACTS)) {
+            showToast("Чтение контактов")
         }
     }
 
@@ -56,5 +67,22 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         AppStates.updateState(AppStates.OFFLINE)
+    }
+
+    //Окно разрешения на чтение контактов
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //Если доступ предоставлен,то идет инициализация
+        if (ContextCompat.checkSelfPermission(
+                APP_ACTIVITY,
+                READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            initContacts()
+        }
     }
 }
