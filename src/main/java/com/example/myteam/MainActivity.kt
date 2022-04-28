@@ -10,6 +10,10 @@ import com.example.myteam.databinding.ActivityMainBinding
 import com.example.myteam.fragments.ChatFragment
 import com.example.myteam.objects.AppDrawer
 import com.example.myteam.utilits.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 //Главная активность
 class MainActivity : AppCompatActivity() {
@@ -27,7 +31,11 @@ class MainActivity : AppCompatActivity() {
         initFirebase()
         //Запускается инициализация юзера, а потом запускается все приложение
         initUser {
-            initContacts()
+            //Корутина - сопрограмма, которая работает в фоновом потоке
+            //ЖЦ - Input-Output
+            CoroutineScope(Dispatchers.IO).launch {
+                initContacts()
+            }
             initFields()
             initFunc()
         }
@@ -36,7 +44,9 @@ class MainActivity : AppCompatActivity() {
     //Функция инициализирует проверку разрешения на доступ к контактам
     private fun initContacts() {
         if (checkPermission(READ_CONTACTS)) {
-            showToast("Чтение контактов")
+            //Для проверки корутины
+            val array = arrayOfNulls<Int>(9500000)
+            array.forEach { println(it) }
         }
     }
 
