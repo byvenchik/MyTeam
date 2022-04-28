@@ -59,4 +59,6 @@ dependencies {
     implementation "com.mikepenz:materialdrawer-nav:7.0.0"
     //CircleImage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //Для recycler
+    implementation 'com.firebaseui:firebase-ui-database:8.0.1'
 }
