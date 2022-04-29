@@ -1,7 +1,5 @@
 package com.example.myteam.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import com.example.myteam.models.CommonModel
 import com.example.myteam.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*
@@ -58,6 +55,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                 return ContactsHolder(view)
             }
 
+            //Заполняет холдер
             override fun onBindViewHolder(
                 holder: ContactsHolder,
                 position: Int,
@@ -71,6 +69,8 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                     holder.name.text = contact.fullname
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoUrl)
+                    //Установим на каждый контакт слушатель клика
+                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(contact)) }
                 }
 
 
