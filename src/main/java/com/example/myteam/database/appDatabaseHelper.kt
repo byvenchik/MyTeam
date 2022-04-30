@@ -2,6 +2,7 @@ package com.example.myteam.utilits
 
 import android.net.Uri
 import android.provider.ContactsContract
+import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.google.firebase.auth.FirebaseAuth
@@ -146,13 +147,13 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
     //Уникальный ключ для сообщения
     val messageKey = REF_DATABASE_ROOT.child(refDialogUser).push().key
     //Map
-    val mapMessage = hashMapOf<String,Any>()
+    val mapMessage = hashMapOf<String, Any>()
     mapMessage[CHILD_FROM] = CURRENT_UID    //Отправитель
     mapMessage[CHILD_TYPE] = typeText
     mapMessage[CHILD_TEXT] = message    //Сообщение
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
 
-    val mapDialog = hashMapOf<String,Any>()
+    val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
     mapDialog["$refDialogReceivingUser/$messageKey"] = mapMessage
 
@@ -161,4 +162,57 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 
+}
+
+//Обновление username в базе данных у текущего пользователя
+fun updateCurrentUsername(newUserName: String) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_USERNAME)
+        .setValue(newUserName)
+        .addOnCompleteListener {
+            if (it.isSuccessful) {
+                showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+                deleteOldUsername(newUserName)
+            } else {
+                showToast(it.exception?.message.toString())
+            }
+        }
+}
+
+//Удаление старого username из базы данных
+private fun deleteOldUsername(newUserName: String) {
+    REF_DATABASE_ROOT.child(NODE_USERNAMES).child(USER.username).removeValue()
+        .addOnSuccessListener {
+            showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+            APP_ACTIVITY.supportFragmentManager.popBackStack()  //По стеку назад
+            USER.username = newUserName    //Обновить модель
+        }.addOnFailureListener {
+            showToast(it.message.toString())
+        }
+}
+
+fun setBioToDatabase(newBio: String) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_BIO)
+        .setValue(newBio)
+        .addOnSuccessListener {
+            showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+            USER.bio = newBio
+            APP_ACTIVITY.supportFragmentManager.popBackStack()
+        }.addOnFailureListener {
+            showToast(it.message.toString())
+        }
+}
+
+
+fun setNameToDatabase(fullname: String) {
+    //Обращение к БД
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME)
+        .setValue(fullname)
+        .addOnSuccessListener { //Передаем значение и вешаем слушатель
+            showToast(APP_ACTIVITY.getString(R.string.toast_data_update)) //Обновлены
+            USER.fullname = fullname
+            APP_ACTIVITY.mAppDrawer.updateHeader()  //Обновление имени в шапке
+            APP_ACTIVITY.supportFragmentManager.popBackStack() //Переход по стеку назад
+        }.addOnFailureListener {
+            showToast(it.message.toString())
+        }
 }

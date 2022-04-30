@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.myteam.MainActivity
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.squareup.picasso.Picasso
@@ -22,36 +23,30 @@ fun showToast(message: String) {
 }
 
 //Функция расширения для AppCompatActivity, позволяет запускать активити
-fun AppCompatActivity.replaceActivity(activity: AppCompatActivity) {
-    val intent = Intent(this, activity::class.java)
-    startActivity(intent)
-    this.finish()
+fun restartActivity() {
+    val intent = Intent(APP_ACTIVITY, MainActivity::class.java)
+    APP_ACTIVITY.startActivity(intent)
+    APP_ACTIVITY.finish()
 }
 
 //Функция расширения для AppCompatActivity, позволяет устанавливать фрагменты
-fun AppCompatActivity.replaceFragment(
+fun replaceFragment(
     fragment: Fragment,
     addStack: Boolean = true
 ) {
     if (addStack) {
-        supportFragmentManager.beginTransaction()
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.data_container, fragment)
             .commit()
     } else {
-        supportFragmentManager.beginTransaction()   //Добавляем фрагмент уже без добавления в стек
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()   //Добавляем фрагмент уже без добавления в стек
             .replace(R.id.data_container, fragment)
             .commit()
     }
 }
 
-//Функция расширения для Fragment, позволяет устанавливать фрагменты
-fun Fragment.replaceFragment(fragment: Fragment) {
-    this.fragmentManager?.beginTransaction()
-        ?.addToBackStack(null)
-        ?.replace(R.id.data_container, fragment)
-        ?.commit()
-}
+
 
 //Функция скрывает клавиатуру
 fun hideKeyboard() {

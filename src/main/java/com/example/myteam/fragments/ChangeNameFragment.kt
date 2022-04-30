@@ -29,18 +29,11 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
             showToast(getString(R.string.settings_toast_name_is_empty))
         } else {
             val fullname = "$name $surname"
-            //Обращение к БД
-            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME)
-                .setValue(fullname).addOnCompleteListener { //Передаем значение и вешаем слушатель
-                    if (it.isSuccessful) {
-                        showToast(getString(R.string.toast_data_update)) //Обновлены
-                        USER.fullname = fullname
-                        APP_ACTIVITY.mAppDrawer.updateHeader()  //Обновление имени в шапке
-                        fragmentManager?.popBackStack() //Переход по стеку назад
-                    }
-                }
+            setNameToDatabase(fullname)
+
         }
     }
 }
+
 
 

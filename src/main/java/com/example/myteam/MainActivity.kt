@@ -5,14 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.example.myteam.activities.RegisterActivity
 import com.example.myteam.databinding.ActivityMainBinding
-import com.example.myteam.fragments.ChatFragment
+import com.example.myteam.fragments.MainFragment
+import com.example.myteam.fragments.register.EnterPhoneNumberFragment
 import com.example.myteam.objects.AppDrawer
 import com.example.myteam.utilits.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 //Главная активность
@@ -43,12 +42,12 @@ class MainActivity : AppCompatActivity() {
 
     //Функция инициализирует функциональность приложения
     private fun initFunc() {
+        setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
-            setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatFragment(), false)
+            replaceFragment(MainFragment(), false)
         } else {
-            replaceActivity(RegisterActivity())
+            replaceFragment(EnterPhoneNumberFragment(),false)
         }
     }
 
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         AppStates.updateState(AppStates.ONLINE)
     }
 
-    //Отрабатывает, когда сворачиваем приложение
     override fun onStop() {
         super.onStop()
         AppStates.updateState(AppStates.OFFLINE)
