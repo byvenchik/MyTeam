@@ -14,6 +14,6 @@ data class CommonModel(
     var text: String = "",
     var type: String = "",      //текст, файлы и тд
     var from: String = "",      //Автор
-    var timeStamp: String = ""   //Время сервера
+    var timeStamp: Any = ""   //Время сервера
 
 )

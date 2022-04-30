@@ -1,7 +1,9 @@
-package com.example.myteam.fragments
+package com.example.myteam.fragments.single_chat
 
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
+import com.example.myteam.fragments.BaseFragment
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.*
@@ -23,8 +25,47 @@ class SingleChatFragment(private val contact: CommonModel) :
     //Ссылка для подключения данных
     private lateinit var mRefUser: DatabaseReference
 
+    //Нужно получить ссылку на сообщение
+    private lateinit var mRefMessages: DatabaseReference
+
+    private lateinit var mAdapter: SingleChatAdapter
+    private lateinit var mRecyclerView: RecyclerView
+
+    //Чтобы избегать утечки памяти нужен объект слушателя
+    private lateinit var mMessagesListener: AppValueEventListener
+
+    //Лист для передачи
+    private var mListMessages = emptyList<CommonModel>()
+
+
     override fun onResume() {
         super.onResume()
+        initToolbar()
+        initRecycleView()
+    }
+
+    private fun initRecycleView() {
+        mRecyclerView = chat_recycle_view
+        mAdapter = SingleChatAdapter()
+        //Ссылка на сообщение
+        mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES)
+            .child(CURRENT_UID)
+            .child(contact.id)
+        mRecyclerView.adapter = mAdapter
+        mMessagesListener = AppValueEventListener { dataSnapshot ->
+            mListMessages =
+                dataSnapshot.children.map { it.getCommonModel() }//Способ получить все ноды
+            //Как только получили наше значение
+            mAdapter.setList(mListMessages)
+
+            //Чтобы двигался recycleView
+            mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+        }
+        //Подключили слушатель к ссылке
+        mRefMessages.addValueEventListener(mMessagesListener)
+    }
+
+    private fun initToolbar() {
         //Скрывали его в маин в xml надо сделать видимым
         mToolbarInfo = APP_ACTIVITY.mToolbar.toolbar_info
         mToolbarInfo.visibility = View.VISIBLE
@@ -43,9 +84,9 @@ class SingleChatFragment(private val contact: CommonModel) :
         chat_btn_send_message.setOnClickListener {
             //Текст сообщения
             val message = chat_input_message.text.toString()
-            if(message.isEmpty()){
+            if (message.isEmpty()) {
                 showToast("Введите сообщение")
-            } else sendMessage(message, contact.id, TYPE_TEXT){
+            } else sendMessage(message, contact.id, TYPE_TEXT) {
                 chat_input_message.setText("")
             }
         }
@@ -68,5 +109,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         mToolbarInfo.visibility = View.GONE
         //Отключить слушатель
         mRefUser.removeEventListener(mListenerInfoToolbar)
+        //Чтобы избежать утечек памяти
+        mRefMessages.removeEventListener(mMessagesListener)
     }
 }

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
 
 //Файл для хранения утилитарных функции, доступных во всем приложении
 
@@ -99,4 +101,11 @@ fun initContacts() {
         //Закончили считываение, запустим функцию для сравнения
         updatePhonesToDatabase(arrayContacts)
     }
+}
+
+//Конвертирование времени из лонг в обычное
+fun String.asTime(): String {
+    val time = Date(this.toLong())
+    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return timeFormat.format(time)
 }
