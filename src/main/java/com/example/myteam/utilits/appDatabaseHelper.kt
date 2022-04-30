@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -19,10 +20,14 @@ lateinit var REF_DATABASE_ROOT: DatabaseReference    //Для ссылки на 
 lateinit var REF_STORAGE_ROOT: StorageReference
 lateinit var USER: UserModel
 
+const val TYPE_TEXT = "text"
+
 //Ноды в Firebase
 const val NODE_USERS = "users"
 const val NODE_USERNAMES = "usernames"
 const val NODE_PHONES = "phones"
+
+const val NODE_MESSAGES = "messages"
 
 //В ней отдельно будем хранить телефоны клиентов, так удобнее при загрузке контактов
 const val NODE_PHONES_CONTACTS = "phones_contacts"
@@ -37,6 +42,12 @@ const val CHILD_FULLNAME = "fullname"
 const val CHILD_BIO = "bio"
 const val CHILD_PHOTO_URL = "photoUrl"
 const val CHILD_STATE = "state"
+
+//Добавил для сообщений
+const val CHILD_TEXT = "text"
+const val CHILD_TYPE = "type"
+const val CHILD_FROM = "from"
+const val CHILD_TIME_STAMP = "timeStamp"
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
 
@@ -94,7 +105,7 @@ inline fun initUser(crossinline function: () -> Unit) {
 
 fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
     //Проверка
-    if(AUTH.currentUser!=null){
+    if (AUTH.currentUser != null) {
         //Считываем ноду и делаем одиночный запрос
         REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(AppValueEventListener {
             //Проходим по всем номерам
@@ -116,6 +127,7 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
         })
     }
 }
+
 //Для выгрузки контактов
 //Если не будет ничего, то вернем пустую модель
 fun DataSnapshot.getCommonModel(): CommonModel =
@@ -124,3 +136,29 @@ fun DataSnapshot.getCommonModel(): CommonModel =
 
 fun DataSnapshot.getUserModel(): UserModel =
     this.getValue(UserModel::class.java) ?: UserModel()
+
+
+fun sendMessage(message: String, receivingUserID: String, typeText: String, function: () -> Unit) {
+
+    //Создаем текстовую ссылку для моментального обновления
+    val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserID"
+    val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserID/$CURRENT_UID"
+    //Уникальный ключ для сообщения
+    val messageKey = REF_DATABASE_ROOT.child(refDialogUser).push().key
+    //Map
+    val mapMessage = hashMapOf<String,Any>()
+    mapMessage[CHILD_FROM] = CURRENT_UID    //Отправитель
+    mapMessage[CHILD_TYPE] = typeText
+    mapMessage[CHILD_TEXT] = message    //Сообщение
+    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
+
+    val mapDialog = hashMapOf<String,Any>()
+    mapDialog["$refDialogUser/$messageKey"] = mapMessage
+    mapDialog["$refDialogReceivingUser/$messageKey"] = mapMessage
+
+    REF_DATABASE_ROOT
+        .updateChildren(mapDialog)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
+
+}

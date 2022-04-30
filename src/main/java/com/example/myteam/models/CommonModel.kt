@@ -8,5 +8,12 @@ data class CommonModel(
     var fullname: String = "",
     var state: String = "",
     var photoUrl: String = "empty",  //Крашилось при новом пользователе
-    var phone: String = ""
+    var phone: String = "",
+
+//Свойства для сообщений
+    var text: String = "",
+    var type: String = "",      //текст, файлы и тд
+    var from: String = "",      //Автор
+    var timeStamp: String = ""   //Время сервера
+
 )
