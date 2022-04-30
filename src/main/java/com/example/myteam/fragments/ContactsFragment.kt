@@ -18,14 +18,19 @@ import kotlinx.android.synthetic.main.fragment_contacts.*
 class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
+
     //Адаптер от Firebase
     private lateinit var mAdapter: FirebaseRecyclerAdapter<CommonModel, ContactsHolder>
+
     //Нужна ссылка от куда мы будем скачивать наши данные
     private lateinit var mRefContacts: DatabaseReference
+
     //Ссылка на User
     private lateinit var mRefUser: DatabaseReference
+
     //Исправлял утечку памяти из-за слушателей
     private lateinit var mRefUserListener: AppValueEventListener
+
     //Для того чтобы собрать все слушатели <ключ,значение>
     private var mapListeners = hashMapOf<DatabaseReference, AppValueEventListener>()
 
@@ -66,11 +71,16 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
                 mRefUserListener = AppValueEventListener {
                     val contact = it.getCommonModel()
-                    holder.name.text = contact.fullname
+
+                    //Проверка пустых имен через записную книжку
+                    if (contact.fullname.isEmpty()) {
+                        holder.name.text = model.fullname   //Тот который приняли из тел. книги
+                    } else holder.name.text = contact.fullname  //Из БД
+
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoUrl)
                     //Установим на каждый контакт слушатель клика
-                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(contact)) }
+                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(model)) }
                 }
 
 
