@@ -92,55 +92,24 @@ inline fun initUser(crossinline function: () -> Unit) {
         })
 }
 
-//Функция инициализирует проверку разрешения на доступ к контактам
-fun initContacts() {
-    //Функция считывает контакты с телефонной книги, хаполняет массив arrayContacts моделями CommonModel
-    if (checkPermission(READ_CONTACTS)) {
-        var arrayContacts = arrayListOf<CommonModel>()
-        val cursor = APP_ACTIVITY.contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null,
-            null,
-            null,
-            null
-        )
-        //Для безопасного вызова курсора
-        cursor?.let {
-            //Цикл для считывания
-            while (it.moveToNext()) {    //Пока есть следующие элементы, двигаемся дальше
-                //Не читаются контакты было без orThrow
-                val fullName =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
-                val phone =
-                    it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                val newModel = CommonModel()
-                newModel.fullname = fullName
-                newModel.phone = phone.replace(Regex("[\\s,-]"), "")
-                //Убрал пробелы в номере, чтобы норм считывать для БД
-                arrayContacts.add(newModel)
-            }
-        }
-        cursor?.close()
-        //Закончили считываение, запустим функцию для сравнения
-        updatePhonesToDatabase(arrayContacts)
-    }
-}
-
 fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
-    //Считываем ноду и делаем одиночный запрос
-    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(AppValueEventListener {
-        //Проходим по всем номерам
-        it.children.forEach { snapshot ->
-            arrayContacts.forEach { contact ->
-                if (snapshot.key == contact.phone) {
-                    REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
-                        .child(snapshot.value.toString()).child(CHILD_ID)   //Уже значение
-                        .setValue(snapshot.value.toString())
-                        .addOnFailureListener { showToast(it.message.toString()) }
+    //Проверка
+    if(AUTH.currentUser!=null){
+        //Считываем ноду и делаем одиночный запрос
+        REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(AppValueEventListener {
+            //Проходим по всем номерам
+            it.children.forEach { snapshot ->
+                arrayContacts.forEach { contact ->
+                    if (snapshot.key == contact.phone) {
+                        REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
+                            .child(snapshot.value.toString()).child(CHILD_ID)   //Уже значение
+                            .setValue(snapshot.value.toString())
+                            .addOnFailureListener { showToast(it.message.toString()) }
+                    }
                 }
             }
-        }
-    })
+        })
+    }
 }
 //Для выгрузки контактов
 //Если не будет ничего, то вернем пустую модель

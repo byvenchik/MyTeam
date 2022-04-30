@@ -9,10 +9,14 @@ enum class AppStates(val state: String) {
     //Для отправки состояния в БД
     companion object {
         fun updateState(appStates: AppStates) {
-            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_STATE)
-                .setValue(appStates.state)
-                .addOnSuccessListener { USER.state = appStates.state }  //Обновили
-                .addOnFailureListener { showToast(it.message.toString()) }
+            //Устраняем баги. Появление null пользователя
+            if(AUTH.currentUser != null){
+                //Тогда делаем установку статуса
+                REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_STATE)
+                    .setValue(appStates.state)
+                    .addOnSuccessListener { USER.state = appStates.state }  //Обновили
+                    .addOnFailureListener { showToast(it.message.toString()) }
+            }
         }
     }
 }
