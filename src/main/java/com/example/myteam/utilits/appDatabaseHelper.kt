@@ -1,10 +1,9 @@
 package com.example.myteam.utilits
 
-import android.annotation.SuppressLint
 import android.net.Uri
 import android.provider.ContactsContract
 import com.example.myteam.models.CommonModel
-import com.example.myteam.models.User
+import com.example.myteam.models.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
@@ -18,7 +17,7 @@ lateinit var AUTH: FirebaseAuth
 lateinit var CURRENT_UID: String
 lateinit var REF_DATABASE_ROOT: DatabaseReference    //Для ссылки на БД
 lateinit var REF_STORAGE_ROOT: StorageReference
-lateinit var USER: User
+lateinit var USER: UserModel
 
 //Ноды в Firebase
 const val NODE_USERS = "users"
@@ -45,7 +44,7 @@ const val FOLDER_PROFILE_IMAGE = "profile_image"
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference    //Обращение к элементу
-    USER = User()
+    USER = UserModel()
     CURRENT_UID = AUTH.currentUser?.uid.toString()
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference  //Ссылка на сторейдж
 }
@@ -83,7 +82,7 @@ inline fun initUser(crossinline function: () -> Unit) {
         .addListenerForSingleValueEvent(AppValueEventListener {
             //Работает только при запуске их есть 3 типа: при запуске, постоянный, дочерний
             //Теперь данные нужно записать в юзера
-            USER = it.getValue(User::class.java) ?: User()
+            USER = it.getValue(UserModel::class.java) ?: UserModel()
             //Метод Firebase может принять тип как класс полностью
             //Элвис оператор Если 0, то инициализировать EmptyUser
             if (USER.username.isEmpty()) {
@@ -147,3 +146,7 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
 //Если не будет ничего, то вернем пустую модель
 fun DataSnapshot.getCommonModel(): CommonModel =
     this.getValue(CommonModel::class.java) ?: CommonModel()
+
+
+fun DataSnapshot.getUserModel(): UserModel =
+    this.getValue(UserModel::class.java) ?: UserModel()
