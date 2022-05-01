@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.example.myteam.utilits.CURRENT_UID
+import com.example.myteam.utilits.DiffUtilCallback
 import com.example.myteam.utilits.asTime
 import kotlinx.android.synthetic.main.message_item.view.*
 import java.text.SimpleDateFormat
@@ -17,6 +19,7 @@ import java.util.*
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
 
     private var mlistMessagesCache = emptyList<CommonModel>()
+    private lateinit var mDiffResult: DiffUtil.DiffResult   //Результат проверки
 
 
     class SingleChatHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -65,9 +68,21 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
 
     //Будет делать копирование из листа в котором мы приняли, в лист с которым работает адаптер
     fun setList(list: List<CommonModel>) {
-        mlistMessagesCache = list
+
+
+        //notifyDataSetChanged() Раньше вызывал так
+    }
+
+    fun addItem(item: CommonModel){
+        val newList = mutableListOf<CommonModel>()
+        newList.addAll(mlistMessagesCache)
+        newList.add(item)
+        //Старый и новый лист
+        mDiffResult = DiffUtil.calculateDiff(DiffUtilCallback(mlistMessagesCache, newList))
+        //Проверили, что все хорошо и делаем перерисовку разных элементов
+        mDiffResult.dispatchUpdatesTo(this)
+        mlistMessagesCache = newList
         //Покажем, что данные изменены и их надо обработать
-        notifyDataSetChanged()
     }
 }
 

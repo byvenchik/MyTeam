@@ -7,6 +7,9 @@ import com.example.myteam.fragments.BaseFragment
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_single_chat.*
@@ -32,10 +35,10 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mRecyclerView: RecyclerView
 
     //Чтобы избегать утечки памяти нужен объект слушателя
-    private lateinit var mMessagesListener: AppValueEventListener
+    private lateinit var mMessagesListener: ChildEventListener  //Было двойное обновление, будем дочернюю ноду слушать
 
     //Лист для передачи
-    private var mListMessages = emptyList<CommonModel>()
+    private var mListMessages = mutableListOf<CommonModel>()
 
 
     override fun onResume() {
@@ -52,17 +55,15 @@ class SingleChatFragment(private val contact: CommonModel) :
             .child(CURRENT_UID)
             .child(contact.id)
         mRecyclerView.adapter = mAdapter
-        mMessagesListener = AppValueEventListener { dataSnapshot ->
-            mListMessages =
-                dataSnapshot.children.map { it.getCommonModel() }//Способ получить все ноды
-            //Как только получили наше значение
-            mAdapter.setList(mListMessages)
 
+        //Анонимный класс
+        mMessagesListener =  AppChildEventListener {
+            mAdapter.addItem(it.getCommonModel())
             //Чтобы двигался recycleView
             mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
         }
         //Подключили слушатель к ссылке
-        mRefMessages.addValueEventListener(mMessagesListener)
+        mRefMessages.addChildEventListener(mMessagesListener)
     }
 
     private fun initToolbar() {
@@ -80,6 +81,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         mRefUser = REF_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
         //Слушатель
         mRefUser.addValueEventListener(mListenerInfoToolbar)
+
         //Слушатель на кнопку отправки сообщения
         chat_btn_send_message.setOnClickListener {
             //Текст сообщения
