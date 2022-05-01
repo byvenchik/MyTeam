@@ -18,7 +18,7 @@ import java.util.*
 
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
 
-    private var mlistMessagesCache = emptyList<CommonModel>()
+    private var mlistMessagesCache = mutableListOf<CommonModel>()
     private lateinit var mDiffResult: DiffUtil.DiffResult   //Результат проверки
 
 
@@ -67,20 +67,30 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
     }
 
 
-
-    fun addItem(item: CommonModel){
-        val newList = mutableListOf<CommonModel>()
-        newList.addAll(mlistMessagesCache)
-        //Проверка если не повторяется -> добавляем
-        if(!newList.contains(item)) newList.add(item)
-        //Сортировка
-        newList.sortBy { it.timeStamp.toString() }
-        //Старый и новый лист
-        mDiffResult = DiffUtil.calculateDiff(DiffUtilCallback(mlistMessagesCache, newList))
-        //Проверили, что все хорошо и делаем перерисовку разных элементов
-        mDiffResult.dispatchUpdatesTo(this)
-        mlistMessagesCache = newList
-        //Покажем, что данные изменены и их надо обработать
+    fun addItem(item: CommonModel,
+                toBottom: Boolean,
+    onSuccess:() -> Unit
+    ) {
+        //Если нужно вниз
+        if (toBottom) {
+            //Убираем дубликаты, если не содержит
+            if (!mlistMessagesCache.contains(item)) {
+                //Добавил в лист
+                mlistMessagesCache.add(item)
+                //Обновление элементов списка
+                notifyItemInserted(mlistMessagesCache.size)
+            }
+        } else {
+            if (!mlistMessagesCache.contains(item)) {
+                //Добавил в лист
+                mlistMessagesCache.add(item)
+                //Сортировка
+                mlistMessagesCache.sortBy { it.timeStamp.toString() }
+                //Обновление элементов списка
+                notifyItemInserted(0)
+            }
+        }
+        onSuccess()
     }
 }
 

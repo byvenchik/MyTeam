@@ -3,6 +3,7 @@ package com.example.myteam.fragments.single_chat
 import android.view.View
 import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
 import com.example.myteam.fragments.BaseFragment
 import com.example.myteam.models.CommonModel
@@ -39,7 +40,7 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mMessagesListener: AppChildEventListener  //Было двойное обновление, будем дочернюю ноду слушать
 
     //Переменная для необходимого количества подгруженных сообщений
-    private var mCountMessages = 10
+    private var mCountMessages = 3
 
     //Для отслеживания состояния RecycleView
     private var mIsScrolling = false
@@ -47,14 +48,15 @@ class SingleChatFragment(private val contact: CommonModel) :
     //Контролировать перемещения
     private var mSmoothScrollToPosition = true
 
-    //Для сбора слушателей, чтобы не было утечки
-    private var mListListeners = mutableListOf<AppChildEventListener>()
+    private lateinit var mSwipeRefreshLayout:SwipeRefreshLayout
 
 
     override fun onResume() {
         super.onResume()
+        mSwipeRefreshLayout = chat_swipe_refresh
         initToolbar()
         initRecycleView()
+
     }
 
     private fun initRecycleView() {
@@ -68,17 +70,18 @@ class SingleChatFragment(private val contact: CommonModel) :
 
         //Анонимный класс
         mMessagesListener = AppChildEventListener {
-            mAdapter.addItem(it.getCommonModel())
-
-            if(mSmoothScrollToPosition){
-                //Чтобы двигался вниз recycleView
-                mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+            mAdapter.addItem(it.getCommonModel(), mSmoothScrollToPosition){
+                if (mSmoothScrollToPosition) {
+                    //Чтобы двигался вниз recycleView
+                    mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+                }
+                //Отключил
+                mSwipeRefreshLayout.isRefreshing = false
             }
         }
 
         //Подключили слушатель к ссылке с ограничением последнего кол-ва сообщений
         mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
-        mListListeners.add(mMessagesListener)
 
         //Подгрузка следующих сообщений
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -87,7 +90,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 //Если есть движения вверх по dy, то делаем обновление
-                if (mIsScrolling&&dy<0) {
+                if (mIsScrolling && dy < 0) {
                     updateData()
                 }
             }
@@ -102,14 +105,18 @@ class SingleChatFragment(private val contact: CommonModel) :
             }
 
         })
+        //Коснулись за резинку и пошло обновление
+        mSwipeRefreshLayout.setOnRefreshListener { updateData() }
     }
 
     private fun updateData() {
         mSmoothScrollToPosition = false
         mIsScrolling = false
         mCountMessages += 10
+        //Удалим старого слушателя
+        mRefMessages.removeEventListener(mMessagesListener)
+        //Подключим нового слушателя
         mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
-        mListListeners.add(mMessagesListener)
     }
 
     private fun initToolbar() {
@@ -158,10 +165,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         mToolbarInfo.visibility = View.GONE
         //Отключить слушатель
         mRefUser.removeEventListener(mListenerInfoToolbar)
-        //Чтобы избежать утечек памяти
-        mListListeners.forEach{
-            mRefMessages.removeEventListener(it)
-        }
-        println()
+        //Чтобы избежать утечек памяти, удалил
+        mRefMessages.removeEventListener(mMessagesListener)
     }
 }
