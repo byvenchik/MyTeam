@@ -1,6 +1,7 @@
 package com.example.myteam.fragments.single_chat
 
 import android.view.View
+import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.fragments.BaseFragment
@@ -35,10 +36,19 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mRecyclerView: RecyclerView
 
     //Чтобы избегать утечки памяти нужен объект слушателя
-    private lateinit var mMessagesListener: ChildEventListener  //Было двойное обновление, будем дочернюю ноду слушать
+    private lateinit var mMessagesListener: AppChildEventListener  //Было двойное обновление, будем дочернюю ноду слушать
 
-    //Лист для передачи
-    private var mListMessages = mutableListOf<CommonModel>()
+    //Переменная для необходимого количества подгруженных сообщений
+    private var mCountMessages = 10
+
+    //Для отслеживания состояния RecycleView
+    private var mIsScrolling = false
+
+    //Контролировать перемещения
+    private var mSmoothScrollToPosition = true
+
+    //Для сбора слушателей, чтобы не было утечки
+    private var mListListeners = mutableListOf<AppChildEventListener>()
 
 
     override fun onResume() {
@@ -57,13 +67,49 @@ class SingleChatFragment(private val contact: CommonModel) :
         mRecyclerView.adapter = mAdapter
 
         //Анонимный класс
-        mMessagesListener =  AppChildEventListener {
+        mMessagesListener = AppChildEventListener {
             mAdapter.addItem(it.getCommonModel())
-            //Чтобы двигался recycleView
-            mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+
+            if(mSmoothScrollToPosition){
+                //Чтобы двигался вниз recycleView
+                mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+            }
         }
-        //Подключили слушатель к ссылке
-        mRefMessages.addChildEventListener(mMessagesListener)
+
+        //Подключили слушатель к ссылке с ограничением последнего кол-ва сообщений
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+        mListListeners.add(mMessagesListener)
+
+        //Подгрузка следующих сообщений
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            //Отрабатывает когда произошло изменение
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                //Если есть движения вверх по dy, то делаем обновление
+                if (mIsScrolling&&dy<0) {
+                    updateData()
+                }
+            }
+
+            //Здесь можно проверить какое состояние на данный момент в RecycleView
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                //Какое на данный момент состояние
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {//Состояние когда пользователь начинает движение
+                    mIsScrolling = true
+                }
+            }
+
+        })
+    }
+
+    private fun updateData() {
+        mSmoothScrollToPosition = false
+        mIsScrolling = false
+        mCountMessages += 10
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+        mListListeners.add(mMessagesListener)
     }
 
     private fun initToolbar() {
@@ -84,6 +130,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
         //Слушатель на кнопку отправки сообщения
         chat_btn_send_message.setOnClickListener {
+            mSmoothScrollToPosition = true  //При отправке возврат вниз
             //Текст сообщения
             val message = chat_input_message.text.toString()
             if (message.isEmpty()) {
@@ -112,6 +159,9 @@ class SingleChatFragment(private val contact: CommonModel) :
         //Отключить слушатель
         mRefUser.removeEventListener(mListenerInfoToolbar)
         //Чтобы избежать утечек памяти
-        mRefMessages.removeEventListener(mMessagesListener)
+        mListListeners.forEach{
+            mRefMessages.removeEventListener(it)
+        }
+        println()
     }
 }

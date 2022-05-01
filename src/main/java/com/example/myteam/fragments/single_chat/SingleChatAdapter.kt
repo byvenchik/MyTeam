@@ -66,17 +66,15 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         }
     }
 
-    //Будет делать копирование из листа в котором мы приняли, в лист с которым работает адаптер
-    fun setList(list: List<CommonModel>) {
 
-
-        //notifyDataSetChanged() Раньше вызывал так
-    }
 
     fun addItem(item: CommonModel){
         val newList = mutableListOf<CommonModel>()
         newList.addAll(mlistMessagesCache)
-        newList.add(item)
+        //Проверка если не повторяется -> добавляем
+        if(!newList.contains(item)) newList.add(item)
+        //Сортировка
+        newList.sortBy { it.timeStamp.toString() }
         //Старый и новый лист
         mDiffResult = DiffUtil.calculateDiff(DiffUtilCallback(mlistMessagesCache, newList))
         //Проверили, что все хорошо и делаем перерисовку разных элементов
