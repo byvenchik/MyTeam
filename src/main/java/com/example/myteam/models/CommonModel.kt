@@ -16,4 +16,12 @@ data class CommonModel(
     var from: String = "",      //Автор
     var timeStamp: Any = ""   //Время сервера
 
-)
+
+
+
+) {
+    //Сравнение сообщений
+    override fun equals(other: Any?): Boolean {
+        return(other as CommonModel).id == id
+    }
+}

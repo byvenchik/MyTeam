@@ -151,6 +151,8 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
     mapMessage[CHILD_FROM] = CURRENT_UID    //Отправитель
     mapMessage[CHILD_TYPE] = typeText
     mapMessage[CHILD_TEXT] = message    //Сообщение
+    mapMessage[CHILD_ID] = messageKey.toString()
+
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
 
     val mapDialog = hashMapOf<String, Any>()

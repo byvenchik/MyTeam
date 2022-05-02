@@ -66,29 +66,26 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         }
     }
 
+    //Добавить вниз
+    fun addItemToBottom(item: CommonModel, onSuccess: () -> Unit) {
+        //Убираем дубликаты, если не содержит
+        if (!mlistMessagesCache.contains(item)) {
+            //Добавил в лист
+            mlistMessagesCache.add(item)
+            //Обновление элементов списка
+            notifyItemInserted(mlistMessagesCache.size)
+        }
+        onSuccess()
+    }
 
-    fun addItem(item: CommonModel,
-                toBottom: Boolean,
-    onSuccess:() -> Unit
-    ) {
-        //Если нужно вниз
-        if (toBottom) {
-            //Убираем дубликаты, если не содержит
-            if (!mlistMessagesCache.contains(item)) {
-                //Добавил в лист
-                mlistMessagesCache.add(item)
-                //Обновление элементов списка
-                notifyItemInserted(mlistMessagesCache.size)
-            }
-        } else {
-            if (!mlistMessagesCache.contains(item)) {
-                //Добавил в лист
-                mlistMessagesCache.add(item)
-                //Сортировка
-                mlistMessagesCache.sortBy { it.timeStamp.toString() }
-                //Обновление элементов списка
-                notifyItemInserted(0)
-            }
+    fun addItemToTop(item: CommonModel, onSuccess: () -> Unit) {
+        if (!mlistMessagesCache.contains(item)) {
+            //Добавил в лист
+            mlistMessagesCache.add(item)
+            //Сортировка
+            mlistMessagesCache.sortBy { it.timeStamp.toString() }
+            //Обновление элементов списка
+            notifyItemInserted(0)
         }
         onSuccess()
     }

@@ -2,6 +2,7 @@ package com.example.myteam.fragments.single_chat
 
 import android.view.View
 import android.widget.AbsListView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
@@ -40,7 +41,7 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mMessagesListener: AppChildEventListener  //Было двойное обновление, будем дочернюю ноду слушать
 
     //Переменная для необходимого количества подгруженных сообщений
-    private var mCountMessages = 3
+    private var mCountMessages = 10
 
     //Для отслеживания состояния RecycleView
     private var mIsScrolling = false
@@ -48,15 +49,22 @@ class SingleChatFragment(private val contact: CommonModel) :
     //Контролировать перемещения
     private var mSmoothScrollToPosition = true
 
-    private lateinit var mSwipeRefreshLayout:SwipeRefreshLayout
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+
+    private lateinit var mLayoutManager: LinearLayoutManager
 
 
     override fun onResume() {
         super.onResume()
-        mSwipeRefreshLayout = chat_swipe_refresh
+        initFields()
         initToolbar()
         initRecycleView()
 
+    }
+
+    private fun initFields() {
+        mSwipeRefreshLayout = chat_swipe_refresh
+        mLayoutManager = LinearLayoutManager(this.context)
     }
 
     private fun initRecycleView() {
@@ -67,18 +75,30 @@ class SingleChatFragment(private val contact: CommonModel) :
             .child(CURRENT_UID)
             .child(contact.id)
         mRecyclerView.adapter = mAdapter
+        //Указываем, что все холдеры будут одного размера
+        mRecyclerView.setHasFixedSize(true)
+        //Скрулла нет, отключаем
+        mRecyclerView.isNestedScrollingEnabled = false
+        mRecyclerView.layoutManager = mLayoutManager
 
         //Анонимный класс
         mMessagesListener = AppChildEventListener {
-            mAdapter.addItem(it.getCommonModel(), mSmoothScrollToPosition){
-                if (mSmoothScrollToPosition) {
+            //Получим сообщение отдельным элементом
+            val message = it.getCommonModel()
+            //Если правда, то нужно опуститься вниз
+            if (mSmoothScrollToPosition) {
+                mAdapter.addItemToBottom(message) {
                     //Чтобы двигался вниз recycleView
                     mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
                 }
-                //Отключил
-                mSwipeRefreshLayout.isRefreshing = false
+            } else {
+                mAdapter.addItemToTop(message) {
+                    //Отключил
+                    mSwipeRefreshLayout.isRefreshing = false
+                }
             }
         }
+
 
         //Подключили слушатель к ссылке с ограничением последнего кол-ва сообщений
         mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
@@ -89,8 +109,11 @@ class SingleChatFragment(private val contact: CommonModel) :
             //Отрабатывает когда произошло изменение
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+                //Пулл
+                println(mRecyclerView.recycledViewPool.getRecycledViewCount(0))
+
                 //Если есть движения вверх по dy, то делаем обновление
-                if (mIsScrolling && dy < 0) {
+                if (mIsScrolling && dy < 0 && mLayoutManager.findFirstVisibleItemPosition() <= 3) {
                     updateData()
                 }
             }
