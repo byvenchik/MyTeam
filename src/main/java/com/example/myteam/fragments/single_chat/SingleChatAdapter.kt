@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
+import com.example.myteam.database.CURRENT_UID
 import com.example.myteam.models.CommonModel
 import com.example.myteam.utilits.*
 import kotlinx.android.synthetic.main.message_item.view.*

@@ -1,6 +1,8 @@
 package com.example.myteam.fragments
 
 import com.example.myteam.R
+import com.example.myteam.database.USER
+import com.example.myteam.database.setNameToDatabase
 import com.example.myteam.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_name.*
 

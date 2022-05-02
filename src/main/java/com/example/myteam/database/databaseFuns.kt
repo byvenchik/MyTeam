@@ -1,59 +1,19 @@
-package com.example.myteam.utilits
+package com.example.myteam.database
 
 import android.net.Uri
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
+import com.example.myteam.utilits.APP_ACTIVITY
+import com.example.myteam.utilits.AppValueEventListener
+import com.example.myteam.utilits.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-//Файл содержит все необходимые инструменты для работы с базой данных
-
-lateinit var AUTH: FirebaseAuth
-lateinit var CURRENT_UID: String
-lateinit var REF_DATABASE_ROOT: DatabaseReference    //Для ссылки на БД
-lateinit var REF_STORAGE_ROOT: StorageReference
-lateinit var USER: UserModel
-
-const val TYPE_TEXT = "text"
-
-//Ноды в Firebase
-const val NODE_USERS = "users"
-const val NODE_USERNAMES = "usernames"
-const val NODE_PHONES = "phones"
-
-const val NODE_MESSAGES = "messages"
-
-//В ней отдельно будем хранить телефоны клиентов, так удобнее при загрузке контактов
-const val NODE_PHONES_CONTACTS = "phones_contacts"
-//Контакты, которые тоже пользуются приложением
-
-
-//Чилды в Firebase
-const val CHILD_ID = "id"
-const val CHILD_PHONE = "phone"
-const val CHILD_USERNAME = "username"
-const val CHILD_FULLNAME = "fullname"
-const val CHILD_BIO = "bio"
-const val CHILD_PHOTO_URL = "photoUrl"
-const val CHILD_STATE = "state"
-
-//Добавил для сообщений
-const val CHILD_TEXT = "text"
-const val CHILD_TYPE = "type"
-const val CHILD_FROM = "from"
-const val CHILD_TIME_STAMP = "timeStamp"
-const val CHILD_FILE_URL = "fileUrl"
-
-const val FOLDER_PROFILE_IMAGE = "profile_image"    //Папка для хранения изображений
-const val FOLDER_MESSAGE_IMAGE = "message_image"
-
-//Инициализация базы данных Firebase
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference    //Обращение к элементу
@@ -82,7 +42,7 @@ inline fun getUrlFromStorage(path: StorageReference, crossinline function: (url:
 
 //Функция высшего порядка, отправляет картинку в хранилище
 //Два аргумента и лямбда
-inline fun putImageToStorage(uri: Uri, path: StorageReference, crossinline function: () -> Unit) {
+inline fun putFileToStorage(uri: Uri, path: StorageReference, crossinline function: () -> Unit) {
     path.putFile(uri)
         .addOnSuccessListener { function() }  //Успешно
         .addOnFailureListener { showToast(it.message.toString()) } //Нет
@@ -135,10 +95,8 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
 fun DataSnapshot.getCommonModel(): CommonModel =
     this.getValue(CommonModel::class.java) ?: CommonModel()
 
-
 fun DataSnapshot.getUserModel(): UserModel =
     this.getValue(UserModel::class.java) ?: UserModel()
-
 
 fun sendMessage(message: String, receivingUserID: String, typeText: String, function: () -> Unit) {
 
@@ -205,7 +163,6 @@ fun setBioToDatabase(newBio: String) {
         }
 }
 
-
 fun setNameToDatabase(fullname: String) {
     //Обращение к БД
     REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME)
@@ -220,7 +177,20 @@ fun setNameToDatabase(fullname: String) {
         }
 }
 
-fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: String) {
+fun getMessageKey(id: String) = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
+    .child(id).push().key.toString()
+
+fun uploadFileToStorage(uri: Uri, messageKey: String, receivedID:String, typeMessage:String) {
+    val path = REF_STORAGE_ROOT.child(FOLDER_FILES).child(messageKey)
+    //Функции высшего порядка
+    putFileToStorage(uri, path) {
+        getUrlFromStorage(path) {
+            sendMessageAsFile(receivedID, it, messageKey, typeMessage)
+        }
+    }
+}
+
+fun sendMessageAsFile(receivingUserID: String, fileUrl: String, messageKey: String, typeMessage: String) {
 
     //Создаем текстовую ссылку для моментального обновления
     val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserID"
@@ -229,10 +199,10 @@ fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: St
     //Map
     val mapMessage = hashMapOf<String, Any>()
     mapMessage[CHILD_FROM] = CURRENT_UID    //Отправитель
-    mapMessage[CHILD_TYPE] = TYPE_MESSAGE_IMAGE
+    mapMessage[CHILD_TYPE] = typeMessage
     mapMessage[CHILD_ID] = messageKey
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
-    mapMessage[CHILD_FILE_URL] = imageUrl
+    mapMessage[CHILD_FILE_URL] = fileUrl
 
     val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
@@ -242,11 +212,4 @@ fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: St
         .updateChildren(mapDialog)
         .addOnFailureListener { showToast(it.message.toString()) }
 
-}
-
-fun getMessageKey(id: String) = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
-    .child(id).push().key.toString()
-
-fun uploadFileToStorage(uri: Uri, messageKey: String) {
-    showToast("Record OK")
 }

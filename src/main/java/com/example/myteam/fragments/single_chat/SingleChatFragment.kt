@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
+import com.example.myteam.database.*
 import com.example.myteam.fragments.BaseFragment
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
@@ -112,7 +113,9 @@ class SingleChatFragment(private val contact: CommonModel) :
                         chat_btn_voice.colorFilter = null
                         //Запись произошла, остановка рекодера
                         mAppVoiceRecorder.stopRecord { file, messageKey ->
-                            uploadFileToStorage(Uri.fromFile(file),messageKey)
+                            uploadFileToStorage(Uri.fromFile(file),messageKey,contact.id, TYPE_MESSAGE_VOICE)
+                            //Опуститься на последний элемент
+                            mSmoothScrollToPosition = true
                         }
                     }
                 }
@@ -249,15 +252,11 @@ class SingleChatFragment(private val contact: CommonModel) :
         ) {  //Тогда нам нужен URI
             val uri = CropImage.getActivityResult(data).uri
             val messageKey = getMessageKey(contact.id)//Получили ключ
-            val path = REF_STORAGE_ROOT.child(FOLDER_MESSAGE_IMAGE)
-                .child(messageKey)
-            //Функции высшего порядка
-            putImageToStorage(uri, path) {
-                getUrlFromStorage(path) {
-                    sendMessageAsImage(contact.id, it, messageKey)
-                    mSmoothScrollToPosition = true
-                }
-            }
+            uploadFileToStorage(uri,messageKey,contact.id, TYPE_MESSAGE_IMAGE)
+            //Опуститься на последний элемент
+            mSmoothScrollToPosition = true
+
+
         }
     }
 

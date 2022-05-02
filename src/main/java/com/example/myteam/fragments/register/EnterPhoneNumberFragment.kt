@@ -1,8 +1,8 @@
 package com.example.myteam.fragments.register
 
 import androidx.fragment.app.Fragment
-import com.example.myteam.MainActivity
 import com.example.myteam.R
+import com.example.myteam.database.AUTH
 import com.example.myteam.utilits.*
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential

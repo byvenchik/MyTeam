@@ -4,14 +4,13 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.myteam.R
 import com.example.myteam.fragments.ContactsFragment
 import com.example.myteam.fragments.SettingsFragment
 import com.example.myteam.utilits.APP_ACTIVITY
-import com.example.myteam.utilits.USER
+import com.example.myteam.database.USER
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader

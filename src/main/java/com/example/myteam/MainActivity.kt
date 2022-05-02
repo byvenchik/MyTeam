@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.example.myteam.database.AUTH
+import com.example.myteam.database.initFirebase
+import com.example.myteam.database.initUser
 import com.example.myteam.databinding.ActivityMainBinding
 import com.example.myteam.fragments.MainFragment
 import com.example.myteam.fragments.register.EnterPhoneNumberFragment

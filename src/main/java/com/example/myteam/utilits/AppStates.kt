@@ -1,5 +1,7 @@
 package com.example.myteam.utilits
 
+import com.example.myteam.database.*
+
 //Типобезопасное перечисление состояний
 enum class AppStates(val state: String) {
     ONLINE("в сети"),
