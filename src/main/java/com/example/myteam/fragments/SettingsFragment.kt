@@ -40,7 +40,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     private fun changePhotoUser() {
         CropImage.activity()
             .setAspectRatio(1, 1)    //Чтобы окно было пропорционально
-            .setRequestedSize(600, 600)  //Размер картинки
+            .setRequestedSize(250, 250)  //Размер картинки
             .setCropShape(CropImageView.CropShape.OVAL)   //Овальный кроппер
             .start(APP_ACTIVITY, this)
     }

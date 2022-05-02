@@ -14,14 +14,13 @@ data class CommonModel(
     var text: String = "",
     var type: String = "",      //текст, файлы и тд
     var from: String = "",      //Автор
-    var timeStamp: Any = ""   //Время сервера
-
-
+    var timeStamp: Any = "",   //Время
+    var imageUrl: String = "empty"
 
 
 ) {
     //Сравнение сообщений
     override fun equals(other: Any?): Boolean {
-        return(other as CommonModel).id == id
+        return (other as CommonModel).id == id
     }
 }
