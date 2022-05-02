@@ -1,7 +1,6 @@
 package com.example.myteam.utilits
 
 import android.net.Uri
-import android.provider.ContactsContract
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
@@ -49,7 +48,7 @@ const val CHILD_TEXT = "text"
 const val CHILD_TYPE = "type"
 const val CHILD_FROM = "from"
 const val CHILD_TIME_STAMP = "timeStamp"
-const val CHILD_IMAGE_URL = "imageUrl"
+const val CHILD_FILE_URL = "fileUrl"
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"    //Папка для хранения изображений
 const val FOLDER_MESSAGE_IMAGE = "message_image"
@@ -233,7 +232,7 @@ fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: St
     mapMessage[CHILD_TYPE] = TYPE_MESSAGE_IMAGE
     mapMessage[CHILD_ID] = messageKey
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
-    mapMessage[CHILD_IMAGE_URL] = imageUrl
+    mapMessage[CHILD_FILE_URL] = imageUrl
 
     val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
@@ -243,4 +242,11 @@ fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: St
         .updateChildren(mapDialog)
         .addOnFailureListener { showToast(it.message.toString()) }
 
+}
+
+fun getMessageKey(id: String) = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
+    .child(id).push().key.toString()
+
+fun uploadFileToStorage(uri: Uri, messageKey: String) {
+    showToast("Record OK")
 }
