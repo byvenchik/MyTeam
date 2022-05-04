@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.fragments.BaseFragment
+import com.example.myteam.fragments.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.*
@@ -150,12 +151,12 @@ class SingleChatFragment(private val contact: CommonModel) :
             val message = it.getCommonModel()
             //Если правда, то нужно опуститься вниз
             if (mSmoothScrollToPosition) {
-                mAdapter.addItemToBottom(message) {
+                mAdapter.addItemToBottom(AppViewFactory.getView(message)) {
                     //Чтобы двигался вниз recycleView
                     mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
                 }
             } else {
-                mAdapter.addItemToTop(message) {
+                mAdapter.addItemToTop(AppViewFactory.getView(message)) {
                     //Отключил
                     mSwipeRefreshLayout.isRefreshing = false
                 }
