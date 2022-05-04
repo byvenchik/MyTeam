@@ -1,4 +1,4 @@
-package com.example.myteam.fragments
+package com.example.myteam.screens
 
 import androidx.fragment.app.Fragment
 import com.example.myteam.R

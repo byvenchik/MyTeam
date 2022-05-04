@@ -1,4 +1,4 @@
-package com.example.myteam.fragments
+package com.example.myteam.screens
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
-import com.example.myteam.fragments.single_chat.SingleChatFragment
+import com.example.myteam.screens.single_chat.SingleChatFragment
 import com.example.myteam.models.CommonModel
 import com.example.myteam.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter

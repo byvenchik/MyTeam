@@ -1,4 +1,4 @@
-package com.example.myteam.fragments
+package com.example.myteam.screens
 
 import com.example.myteam.R
 import com.example.myteam.database.USER

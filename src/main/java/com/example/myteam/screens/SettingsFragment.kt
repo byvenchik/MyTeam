@@ -1,4 +1,4 @@
-package com.example.myteam.fragments
+package com.example.myteam.screens
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent

@@ -4,11 +4,10 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.myteam.R
-import com.example.myteam.fragments.ContactsFragment
-import com.example.myteam.fragments.SettingsFragment
+import com.example.myteam.screens.ContactsFragment
+import com.example.myteam.screens.SettingsFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
 import com.example.myteam.utilits.downloadAndSetImage
@@ -23,7 +22,6 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
-import java.text.FieldPosition
 
 //Класс для управления боковым меню NavigationDrawer
 class AppDrawer {

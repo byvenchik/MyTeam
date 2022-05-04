@@ -1,4 +1,4 @@
-package com.example.myteam.fragments.message_recycler_view.views
+package com.example.myteam.message_recycler_view.views
 
 import com.example.myteam.models.CommonModel
 import com.example.myteam.utilits.TYPE_MESSAGE_IMAGE

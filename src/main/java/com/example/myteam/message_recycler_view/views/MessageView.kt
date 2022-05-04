@@ -1,4 +1,4 @@
-package com.example.myteam.fragments.message_recycler_view.views
+package com.example.myteam.message_recycler_view.views
 
 interface MessageView {
 

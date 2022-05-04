@@ -9,8 +9,8 @@ import com.example.myteam.database.AUTH
 import com.example.myteam.database.initFirebase
 import com.example.myteam.database.initUser
 import com.example.myteam.databinding.ActivityMainBinding
-import com.example.myteam.fragments.MainFragment
-import com.example.myteam.fragments.register.EnterPhoneNumberFragment
+import com.example.myteam.screens.MainFragment
+import com.example.myteam.screens.register.EnterPhoneNumberFragment
 import com.example.myteam.objects.AppDrawer
 import com.example.myteam.utilits.*
 import kotlinx.coroutines.CoroutineScope

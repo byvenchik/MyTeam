@@ -1,4 +1,4 @@
-package com.example.myteam.fragments.single_chat
+package com.example.myteam.screens.single_chat
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
 import com.example.myteam.database.*
-import com.example.myteam.fragments.BaseFragment
-import com.example.myteam.fragments.message_recycler_view.views.AppViewFactory
+import com.example.myteam.screens.BaseFragment
+import com.example.myteam.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.*
