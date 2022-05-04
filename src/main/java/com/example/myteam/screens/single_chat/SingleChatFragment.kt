@@ -18,9 +18,11 @@ import com.example.myteam.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.choice_upload.*
 import kotlinx.android.synthetic.main.fragment_single_chat.*
 import kotlinx.android.synthetic.main.toolbar_info.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -64,6 +66,9 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     private lateinit var mAppVoiceRecorder: AppVoiceRecorder
 
+    //Выдвижное меню выбора передачи файла
+    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<*>
+
 
     override fun onResume() {
         super.onResume()
@@ -75,6 +80,9 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initFields() {
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_choice)
+        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN   //Изначально скроем
+
         mAppVoiceRecorder = AppVoiceRecorder()
         mSwipeRefreshLayout = chat_swipe_refresh
         mLayoutManager = LinearLayoutManager(this.context)
@@ -91,7 +99,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             }
         })
 
-        chat_btn_attach.setOnClickListener { attachFile() }
+        chat_btn_attach.setOnClickListener { attach() }
 
         CoroutineScope(Dispatchers.IO).launch {
             //Следит за зажимом
@@ -114,7 +122,12 @@ class SingleChatFragment(private val contact: CommonModel) :
                         chat_btn_voice.colorFilter = null
                         //Запись произошла, остановка рекодера
                         mAppVoiceRecorder.stopRecord { file, messageKey ->
-                            uploadFileToStorage(Uri.fromFile(file),messageKey,contact.id, TYPE_MESSAGE_VOICE)
+                            uploadFileToStorage(
+                                Uri.fromFile(file),
+                                messageKey,
+                                contact.id,
+                                TYPE_MESSAGE_VOICE
+                            )
                             //Опуститься на последний элемент
                             mSmoothScrollToPosition = true
                         }
@@ -124,7 +137,20 @@ class SingleChatFragment(private val contact: CommonModel) :
             }
         }
     }
+
+    private fun attach() {
+        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED //Выводи наверх
+        btn_attach_file.setOnClickListener { attachFile() }
+        btn_attach_image.setOnClickListener { attachImage() }
+    }
+
     private fun attachFile() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*" //Любой тип
+        startActivityForResult(intent,PICK_FILE_REQUEST_CODE)
+    }
+
+    private fun attachImage() {
         CropImage.activity()
             .setAspectRatio(1, 1)    //Чтобы окно было пропорционально
             .setRequestedSize(250, 250)  //Размер картинки
@@ -248,17 +274,27 @@ class SingleChatFragment(private val contact: CommonModel) :
     //Перехват фото-активити
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
-            && resultCode == Activity.RESULT_OK && data != null
-        ) {  //Тогда нам нужен URI
-            val uri = CropImage.getActivityResult(data).uri
-            val messageKey = getMessageKey(contact.id)//Получили ключ
-            uploadFileToStorage(uri,messageKey,contact.id, TYPE_MESSAGE_IMAGE)
-            //Опуститься на последний элемент
-            mSmoothScrollToPosition = true
+        //Проверка
+        if(data!=null){
+            when(requestCode){
+                CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
+                    val uri = CropImage.getActivityResult(data).uri
+                    val messageKey = getMessageKey(contact.id)//Получили ключ
+                    uploadFileToStorage(uri, messageKey, contact.id, TYPE_MESSAGE_IMAGE)
+                    //Опуститься на последний элемент
+                    mSmoothScrollToPosition = true
+                }
+                PICK_FILE_REQUEST_CODE ->{
+                    val uri = data.data
+                    val messageKey = getMessageKey(contact.id)//Получили ключ
+                    uri?.let { uploadFileToStorage(it, messageKey, contact.id, TYPE_MESSAGE_FILE) }
+                    //Опуститься на последний элемент
+                    mSmoothScrollToPosition = true
+                }
 
-
+            }
         }
+
     }
 
     override fun onPause() {
