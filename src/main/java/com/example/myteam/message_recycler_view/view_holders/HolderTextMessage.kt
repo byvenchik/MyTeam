@@ -11,12 +11,12 @@ import kotlinx.android.synthetic.main.message_item_text.view.*
 
 class HolderTextMessage(view: View) : RecyclerView.ViewHolder(view), MessageHolder {
 
-    val blocUserMessage: ConstraintLayout = view.bloc_user_message
-    val chatUserMessage: TextView = view.chat_user_message
-    val chatUserMessageTime: TextView = view.chat_user_message_time
-    val blocReceivedMessage: ConstraintLayout = view.bloc_received_message
-    val chatReceivedMessage: TextView = view.chat_received_message
-    val chatReceivedMessageTime: TextView = view.chat_received_message_time
+    private val blocUserMessage: ConstraintLayout = view.bloc_user_message
+    private val chatUserMessage: TextView = view.chat_user_message
+    private val chatUserMessageTime: TextView = view.chat_user_message_time
+    private val blocReceivedMessage: ConstraintLayout = view.bloc_received_message
+    private val chatReceivedMessage: TextView = view.chat_received_message
+    private val chatReceivedMessageTime: TextView = view.chat_received_message_time
 
 
     override fun drawMessage(view: MessageView) {
@@ -40,6 +40,16 @@ class HolderTextMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
             chatReceivedMessageTime.text =
                 view.timeStamp.asTime()
         }
+    }
+
+    //Отслеживание появления холдера на экране
+    override fun onAttach(view: MessageView) {
+
+    }
+
+    //Отслеживание когда холдер ушел за экран
+    override fun onDetach() {
+
     }
 
 }

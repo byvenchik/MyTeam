@@ -13,12 +13,12 @@ import kotlinx.android.synthetic.main.message_item_image.view.*
 
 class HolderImageMessage(view: View) : RecyclerView.ViewHolder(view), MessageHolder {
 
-    val blocReceivedImageMessage: ConstraintLayout = view.bloc_received_image_message
-    val blocUserImageMessage: ConstraintLayout = view.bloc_user_image_message
-    val chatUserImage: ImageView = view.chat_user_image
-    val chatReceivedImage: ImageView = view.chat_received_image
-    val chatUserImageMessageTime: TextView = view.chat_user_image_message_time
-    val chatReceivedImageMessageTime: TextView = view.chat_received_image_message_time
+    private val blocReceivedImageMessage: ConstraintLayout = view.bloc_received_image_message
+    private val blocUserImageMessage: ConstraintLayout = view.bloc_user_image_message
+    private val chatUserImage: ImageView = view.chat_user_image
+    private val chatReceivedImage: ImageView = view.chat_received_image
+    private val chatUserImageMessageTime: TextView = view.chat_user_image_message_time
+    private val chatReceivedImageMessageTime: TextView = view.chat_received_image_message_time
 
 
     override fun drawMessage(view: MessageView) {
@@ -39,6 +39,16 @@ class HolderImageMessage(view: View) : RecyclerView.ViewHolder(view), MessageHol
             chatReceivedImageMessageTime.text =
                 view.timeStamp.asTime()
         }
+    }
+
+    //Отслеживание появления холдера на экране
+    override fun onAttach(view: MessageView) {
+
+    }
+
+    //Отслеживание когда холдер ушел за экран
+    override fun onDetach() {
+
     }
 
 }

@@ -9,6 +9,8 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mlistMessagesCache = mutableListOf<MessageView>()
 
+    private var mListHolders = mutableListOf<MessageHolder>()
+
 
     //Создал холдер
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -26,6 +28,19 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //Отражает холдер
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MessageHolder).drawMessage(mlistMessagesCache[position])
+    }
+
+    //Функция отрабатывает, когда холдер появляется на экране
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        (holder as MessageHolder).onAttach(mlistMessagesCache[holder.adapterPosition])
+        mListHolders.add((holder as MessageHolder))
+        super.onViewAttachedToWindow(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        (holder as MessageHolder).onDetach()
+        mListHolders.remove((holder as MessageHolder))
+        super.onViewDetachedFromWindow(holder)
     }
 
     //Добавить вниз
@@ -50,6 +65,13 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             notifyItemInserted(0)
         }
         onSuccess()
+    }
+
+    //Отрабатывает когда слушали голосовые и вышли из чата
+    fun onDestroy() {
+        mListHolders.forEach{
+            it.onDetach()
+        }
     }
 }
 
