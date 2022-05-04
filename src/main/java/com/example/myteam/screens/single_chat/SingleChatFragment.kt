@@ -147,7 +147,7 @@ class SingleChatFragment(private val contact: CommonModel) :
     private fun attachFile() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "*/*" //Любой тип
-        startActivityForResult(intent,PICK_FILE_REQUEST_CODE)
+        startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
     }
 
     private fun attachImage() {
@@ -275,8 +275,8 @@ class SingleChatFragment(private val contact: CommonModel) :
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         //Проверка
-        if(data!=null){
-            when(requestCode){
+        if (data != null) {
+            when (requestCode) {
                 CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
                     val uri = CropImage.getActivityResult(data).uri
                     val messageKey = getMessageKey(contact.id)//Получили ключ
@@ -284,10 +284,11 @@ class SingleChatFragment(private val contact: CommonModel) :
                     //Опуститься на последний элемент
                     mSmoothScrollToPosition = true
                 }
-                PICK_FILE_REQUEST_CODE ->{
+                PICK_FILE_REQUEST_CODE -> {
                     val uri = data.data
                     val messageKey = getMessageKey(contact.id)//Получили ключ
-                    uri?.let { uploadFileToStorage(it, messageKey, contact.id, TYPE_MESSAGE_FILE) }
+                    val fileName = getFilenameFromUri(uri!!)
+                    uploadFileToStorage(uri, messageKey, contact.id, TYPE_MESSAGE_FILE, fileName)
                     //Опуститься на последний элемент
                     mSmoothScrollToPosition = true
                 }

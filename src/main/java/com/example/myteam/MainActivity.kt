@@ -33,11 +33,6 @@ class MainActivity : AppCompatActivity() {
         initFirebase()
         //Запускается инициализация юзера, а потом запускается все приложение
         initUser {
-            //Корутина - сопрограмма, которая работает в фоновом потоке
-            //ЖЦ - Input-Output
-            CoroutineScope(Dispatchers.IO).launch {
-                initContacts()
-            }
             initFields()
             initFunc()
         }
@@ -48,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
             mAppDrawer.create()
+
+            //Корутина - сопрограмма, которая работает в фоновом потоке
+            //ЖЦ - Input-Output
+            CoroutineScope(Dispatchers.IO).launch {
+                initContacts()
+            }
+
             replaceFragment(MainFragment(), false)
         } else {
             replaceFragment(EnterPhoneNumberFragment(),false)
