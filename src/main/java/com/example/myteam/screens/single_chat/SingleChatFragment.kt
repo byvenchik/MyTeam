@@ -16,6 +16,7 @@ import com.example.myteam.screens.BaseFragment
 import com.example.myteam.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
+import com.example.myteam.screens.chat_list.ChatsFragment
 import com.example.myteam.screens.settings.ChangeNameFragment
 import com.example.myteam.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -327,6 +328,17 @@ class SingleChatFragment(private val contact: CommonModel) :
     //Слушатель выбора пунктов выпадающего меню
     //Срабатывает когда кликаем по кнопке меню
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return true //Закончить
+        when(item.itemId){
+            R.id.menu_clear_chat -> clearChat(contact.id){
+                showToast("История сообщений удалена")
+                replaceFragment(ChatsFragment())
+            }
+            R.id.menu_delete_chat -> deleteChat(contact.id){
+                showToast("Чат удален")
+                replaceFragment(ChatsFragment())
+            }
+        }
+        return true
     }
+
 }

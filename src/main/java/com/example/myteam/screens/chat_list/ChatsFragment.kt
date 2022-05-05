@@ -9,6 +9,7 @@ import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
 import com.example.myteam.utilits.TYPE_MESSAGE_VOICE
 import kotlinx.android.synthetic.main.fragment_chats.*
+import kotlin.reflect.typeOf
 
 
 class ChatsFragment : BaseFragment(R.layout.fragment_chats) {
@@ -44,8 +45,12 @@ class ChatsFragment : BaseFragment(R.layout.fragment_chats) {
                         mRefMessages.child(model.id).limitToLast(1)
                             .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot2 ->
                                 val tempList = dataSnapshot2.children.map { it.getCommonModel() }
-                                newModel.lastMessage = tempList[0].text
 
+                                if (tempList.isEmpty()) {
+                                    newModel.lastMessage = "История сообщений была удалена"
+                                } else {
+                                    newModel.lastMessage = tempList[0].text
+                                }
                                 if (newModel.fullname.isEmpty()) {
                                     newModel.fullname = newModel.phone
                                 }
