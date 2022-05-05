@@ -15,7 +15,9 @@ data class CommonModel(
     var type: String = "",      //текст, файлы и тд
     var from: String = "",      //Автор
     var timeStamp: Any = "",   //Время
-    var fileUrl: String = "empty"
+    var fileUrl: String = "empty",
+
+    var lastMessage:String = ""
 
 
 ) {

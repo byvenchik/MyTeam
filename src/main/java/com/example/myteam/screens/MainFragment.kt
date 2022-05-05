@@ -6,7 +6,7 @@ import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.hideKeyboard
 
 //Главный фрагмент, содержит все чаты, группы и каналы с которыми взаимодействует пользователь
-class MainFragment : Fragment(R.layout.fragment_chat) {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onResume() {
         super.onResume()
