@@ -39,3 +39,7 @@ const val CHILD_FILE_URL = "fileUrl"
 const val FOLDER_PROFILE_IMAGE = "profile_image"    //Папка для хранения изображений
 const val FOLDER_FILES = "messages_files"
 
+
+//Для чатов
+const val NODE_CHAT_LIST = "chat_list"
+
