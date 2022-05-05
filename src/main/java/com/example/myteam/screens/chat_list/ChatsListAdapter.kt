@@ -7,7 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
+import com.example.myteam.screens.single_chat.SingleChatFragment
 import com.example.myteam.utilits.downloadAndSetImage
+import com.example.myteam.utilits.replaceFragment
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.chat_list_item.view.*
 
@@ -23,7 +25,12 @@ class ChatsListAdapter: RecyclerView.Adapter<ChatsListAdapter.ChatsListHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsListHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_list_item, parent, false)
-        return ChatsListHolder(view)
+        //Клики
+        val holder = ChatsListHolder(view)
+        holder.itemView.setOnClickListener {
+            replaceFragment(SingleChatFragment(listItems[holder.adapterPosition]))
+        }
+        return holder
     }
 
     override fun getItemCount(): Int = listItems.size

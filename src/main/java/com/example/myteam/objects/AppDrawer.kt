@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.myteam.R
 import com.example.myteam.screens.ContactsFragment
-import com.example.myteam.screens.SettingsFragment
+import com.example.myteam.screens.settings.SettingsFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
 import com.example.myteam.screens.chat_list.ChatsFragment

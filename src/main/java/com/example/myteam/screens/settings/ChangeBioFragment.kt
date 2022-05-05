@@ -1,8 +1,9 @@
-package com.example.myteam.screens
+package com.example.myteam.screens.settings
 
 import com.example.myteam.R
 import com.example.myteam.database.USER
 import com.example.myteam.database.setBioToDatabase
+import com.example.myteam.screens.BaseChangeFragment
 import kotlinx.android.synthetic.main.fragment_change_bio.*
 
 //Фрагмент для изменения информации о пользователе

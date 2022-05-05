@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,7 @@ import com.example.myteam.screens.BaseFragment
 import com.example.myteam.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
+import com.example.myteam.screens.settings.ChangeNameFragment
 import com.example.myteam.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
@@ -80,6 +80,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initFields() {
+        setHasOptionsMenu(true)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_choice)
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN   //Изначально скроем
 
@@ -316,5 +317,16 @@ class SingleChatFragment(private val contact: CommonModel) :
         //Удаляем рекордер
         mAppVoiceRecorder.releaseRecorder()
         mAdapter.onDestroy()
+    }
+
+    //Создание выпадающего меню
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
+    }
+
+    //Слушатель выбора пунктов выпадающего меню
+    //Срабатывает когда кликаем по кнопке меню
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return true //Закончить
     }
 }
