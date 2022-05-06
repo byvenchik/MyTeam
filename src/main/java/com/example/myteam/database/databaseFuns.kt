@@ -283,6 +283,6 @@ fun clearChat(id: String, function: () -> Unit) {
                 .child(CURRENT_UID)
                 .removeValue()
                 .addOnSuccessListener { function() }
-                .addOnFailureListener { showToast(it.message.toString()) }
         }
+        .addOnFailureListener { showToast(it.message.toString()) }  
 }

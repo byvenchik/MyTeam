@@ -13,7 +13,7 @@ import com.example.myteam.utilits.replaceFragment
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.chat_list_item.view.*
 
-class ChatsListAdapter: RecyclerView.Adapter<ChatsListAdapter.ChatsListHolder>() {
+class ChatListAdapter: RecyclerView.Adapter<ChatListAdapter.ChatsListHolder>() {
 
     private var listItems = mutableListOf<CommonModel>()    //Для отображения
 

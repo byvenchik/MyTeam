@@ -6,11 +6,12 @@ import android.view.View
 import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.myteam.R
-import com.example.myteam.screens.ContactsFragment
+import com.example.myteam.screens.contacts.ContactsFragment
 import com.example.myteam.screens.settings.SettingsFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
-import com.example.myteam.screens.chat_list.ChatsFragment
+import com.example.myteam.screens.chat_list.ChatListFragment
+import com.example.myteam.screens.group_list.AddContactsFragment
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
@@ -71,19 +72,19 @@ class AppDrawer {
             .addDrawerItems(
                 PrimaryDrawerItem().withIdentifier(1)
                     .withIconTintingEnabled(true)
-                    .withName("Чаты")
+                    .withName("Диалоги")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_chats),
 
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
-                    .withName("Создать группу")
+                    .withName("Команда")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_group),
 
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
-                    .withName("Создать секретный чат")
+                    .withName("Создать команду")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_lock),
 
@@ -147,7 +148,8 @@ class AppDrawer {
         when (position) {
             8 -> replaceFragment(SettingsFragment())
             5 -> replaceFragment(ContactsFragment())
-            1 -> replaceFragment(ChatsFragment())
+            1 -> replaceFragment(ChatListFragment())
+            3 -> replaceFragment(AddContactsFragment())
         }
     }
 

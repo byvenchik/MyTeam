@@ -1,4 +1,4 @@
-package com.example.myteam.screens
+package com.example.myteam.screens.base
 
 import android.view.Menu
 import android.view.MenuInflater

@@ -1,7 +1,6 @@
 package com.example.myteam.screens.single_chat
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.*
@@ -12,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
 import com.example.myteam.database.*
-import com.example.myteam.screens.BaseFragment
+import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
-import com.example.myteam.screens.chat_list.ChatsFragment
-import com.example.myteam.screens.settings.ChangeNameFragment
+import com.example.myteam.screens.chat_list.ChatListFragment
 import com.example.myteam.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
@@ -331,11 +329,11 @@ class SingleChatFragment(private val contact: CommonModel) :
         when(item.itemId){
             R.id.menu_clear_chat -> clearChat(contact.id){
                 showToast("История сообщений удалена")
-                replaceFragment(ChatsFragment())
+                replaceFragment(ChatListFragment())
             }
             R.id.menu_delete_chat -> deleteChat(contact.id){
                 showToast("Чат удален")
-                replaceFragment(ChatsFragment())
+                replaceFragment(ChatListFragment())
             }
         }
         return true

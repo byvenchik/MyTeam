@@ -1,4 +1,4 @@
-package com.example.myteam.screens
+package com.example.myteam.screens.contacts
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.screens.single_chat.SingleChatFragment
 import com.example.myteam.models.CommonModel
+import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions

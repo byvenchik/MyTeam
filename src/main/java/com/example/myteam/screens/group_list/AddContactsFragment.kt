@@ -1,21 +1,20 @@
-package com.example.myteam.screens.chat_list
+package com.example.myteam.screens.group_list
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.models.CommonModel
-import com.example.myteam.screens.BaseFragment
+import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
-import com.example.myteam.utilits.TYPE_MESSAGE_VOICE
+import kotlinx.android.synthetic.main.fragment_add_contacts.*
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlin.reflect.typeOf
 
 
-class ChatsFragment : BaseFragment(R.layout.fragment_chats) {
+class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: ChatsListAdapter
+    private lateinit var mAdapter: AddContactsAdapter
     private val mRefChatsList = REF_DATABASE_ROOT.child(NODE_CHAT_LIST).child(CURRENT_UID)
     private val mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS)
     private val mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
@@ -23,13 +22,18 @@ class ChatsFragment : BaseFragment(R.layout.fragment_chats) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Чаты"
+        APP_ACTIVITY.title = "Добавить участника"
         initRecyclerView()
+        add_contacts_btn_next.setOnClickListener {
+            listContacts.forEach{
+                println(it.id)
+            }
+        }
     }
 
     private fun initRecyclerView() {
-        mRecyclerView = chat_list_recycle_view
-        mAdapter = ChatsListAdapter()
+        mRecyclerView = add_contacts_recycle_view
+        mAdapter = AddContactsAdapter()
 
         //1 запрос
         mRefChatsList.addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot ->
@@ -61,5 +65,7 @@ class ChatsFragment : BaseFragment(R.layout.fragment_chats) {
         })
         mRecyclerView.adapter = mAdapter
     }
-
+companion object{
+    val listContacts = mutableListOf<CommonModel>()
+}
 }

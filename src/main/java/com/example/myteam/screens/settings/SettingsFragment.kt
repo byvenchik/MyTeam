@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.myteam.R
 import com.example.myteam.database.*
-import com.example.myteam.screens.BaseFragment
+import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
