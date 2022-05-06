@@ -7,10 +7,10 @@ import com.example.myteam.models.CommonModel
 import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
-import kotlinx.android.synthetic.main.fragment_chats.*
+import kotlinx.android.synthetic.main.fragment_chat_list.*
 
 
-class ChatListFragment : BaseFragment(R.layout.fragment_chats) {
+class ChatListFragment : BaseFragment(R.layout.fragment_chat_list) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: ChatListAdapter

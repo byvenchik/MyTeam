@@ -7,8 +7,8 @@ import com.example.myteam.models.CommonModel
 import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
+import com.example.myteam.utilits.replaceFragment
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
-import kotlinx.android.synthetic.main.fragment_chats.*
 
 
 class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
@@ -25,9 +25,7 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
         APP_ACTIVITY.title = "Добавить участника"
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            listContacts.forEach{
-                println(it.id)
-            }
+        replaceFragment(CreateGroupFragment(listContacts))
         }
     }
 
