@@ -12,6 +12,7 @@ import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
 import com.example.myteam.screens.chat_list.ChatListFragment
 import com.example.myteam.screens.group_list.AddContactsFragment
+import com.example.myteam.screens.group_list.GroupListFragment
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
@@ -150,6 +151,7 @@ class AppDrawer {
             5 -> replaceFragment(ContactsFragment())
             1 -> replaceFragment(ChatListFragment())
             3 -> replaceFragment(AddContactsFragment())
+            2 -> replaceFragment(GroupListFragment())
         }
     }
 

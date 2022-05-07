@@ -6,6 +6,7 @@ import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
+import com.example.myteam.utilits.TYPE_GROUP
 import com.example.myteam.utilits.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -14,6 +15,7 @@ import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
+import java.util.HashMap
 
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
@@ -301,6 +303,7 @@ fun createGroupToDatabase(
     val mapData = hashMapOf<String, Any>()
     mapData[CHILD_ID] = keyGroup
     mapData[CHILD_FULLNAME] = nameGroup
+    mapData[CHILD_PHOTO_URL]="empty"
 
     val mapMembers = hashMapOf<String, Any>()
     listContacts.forEach {
@@ -312,14 +315,64 @@ fun createGroupToDatabase(
 
     path.updateChildren(mapData)
         .addOnSuccessListener {
-            function()
+
             if (uri != Uri.EMPTY) {
                 putFileToStorage(uri, pathStorage) {
                     getUrlFromStorage(pathStorage) {
-                        path.child(CHILD_FILE_URL).setValue(it)
+                        path.child(CHILD_PHOTO_URL).setValue(it)
+                        addGroupsToGroopList(mapData,listContacts){
+                            function()
+                        }
                     }
                 }
+            } else{
+                addGroupsToGroopList(mapData,listContacts){
+                    function()
+                }
             }
+
         }
         .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun addGroupsToGroopList(
+    mapData: HashMap<String, Any>,
+    listContacts: List<CommonModel>,
+    function: () -> Unit
+) {
+    val path = REF_DATABASE_ROOT.child(NODE_GROUP_LIST)
+    val map = hashMapOf<String,Any>()
+
+    map[CHILD_ID] = mapData[CHILD_ID].toString()
+    map[CHILD_TYPE] = TYPE_GROUP
+    listContacts.forEach {
+        path.child(it.id).child(map[CHILD_ID].toString()).updateChildren(map)
+    }
+    //Для текущего пользователя
+    path.child(CURRENT_UID).child(map[CHILD_ID].toString()).updateChildren(map)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun sendMessageToGroup(message: String, groupID: String, typeText: String, function: () -> Unit) {
+
+//Создаем текстовую ссылку для моментального обновления
+    var refMessages = "$NODE_GROUPS/$groupID/$NODE_MESSAGES"
+        //Уникальный ключ для сообщения
+    val messageKey = REF_DATABASE_ROOT.child(refMessages).push().key
+    //Map
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] = CURRENT_UID    //Отправитель
+    mapMessage[CHILD_TYPE] = typeText
+    mapMessage[CHILD_TEXT] = message    //Сообщение
+    mapMessage[CHILD_ID] = messageKey.toString()
+
+    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
+
+
+    REF_DATABASE_ROOT.child(refMessages).child(messageKey.toString())
+        .updateChildren(mapMessage)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
+
 }

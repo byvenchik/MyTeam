@@ -43,6 +43,8 @@ const val FOLDER_FILES = "messages_files"
 //Для чатов
 const val NODE_CHAT_LIST = "chat_list"
 
+const val NODE_GROUP_LIST="group_list"
+
 const val NODE_MEMBERS = "members"
 const val NODE_GROUPS = "groups"
 const val FOLDER_GROUPS_IMAGE = "groups_image"
