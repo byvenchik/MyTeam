@@ -43,3 +43,10 @@ const val FOLDER_FILES = "messages_files"
 //Для чатов
 const val NODE_CHAT_LIST = "chat_list"
 
+const val NODE_MEMBERS = "members"
+const val NODE_GROUPS = "groups"
+const val FOLDER_GROUPS_IMAGE = "groups_image"
+const val USER_CREATOR = "creator"
+const val USER_ADMIN = "admin"
+const val USER_MEMBER = "member"
+
