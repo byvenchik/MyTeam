@@ -8,6 +8,7 @@ import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
 import com.example.myteam.utilits.replaceFragment
+import com.example.myteam.utilits.showToast
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
 
@@ -22,10 +23,15 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
 
     override fun onResume() {
         super.onResume()
+        listContacts.clear()    //Очистка списка добавленных контактов
         APP_ACTIVITY.title = "Добавить участника"
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-        replaceFragment(CreateGroupFragment(listContacts))
+            if (listContacts.isEmpty()) {
+                showToast("Добавьте участника")
+            } else {
+                replaceFragment(CreateGroupFragment(listContacts))
+            }
         }
     }
 
@@ -63,7 +69,8 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
         })
         mRecyclerView.adapter = mAdapter
     }
-companion object{
-    val listContacts = mutableListOf<CommonModel>()
-}
+
+    companion object {
+        val listContacts = mutableListOf<CommonModel>()
+    }
 }

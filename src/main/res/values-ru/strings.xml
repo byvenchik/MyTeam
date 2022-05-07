@@ -28,7 +28,7 @@
     <string name="settings_input_bio">bio</string>
     <string name="clear_history_chat">Очистить историю</string>
     <string name="delete_chat">Удалить чат</string>
-    
+
     <plurals name="count_members">
         <item quantity="one">%d участник</item>
         <item quantity="few">%d участника</item>

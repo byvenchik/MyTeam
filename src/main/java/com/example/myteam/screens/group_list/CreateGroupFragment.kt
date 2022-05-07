@@ -5,6 +5,7 @@ import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.APP_ACTIVITY
+import com.example.myteam.utilits.getPlurals
 import com.example.myteam.utilits.showToast
 import kotlinx.android.synthetic.main.fragment_create_group.*
 
@@ -19,6 +20,7 @@ class CreateGroupFragment(private var listContacts:List<CommonModel>): BaseFragm
         initRecyclerView()
         create_group_btn_complete.setOnClickListener { showToast("click") }
         create_group_input_name.requestFocus()
+        create_group_counts.text = getPlurals(listContacts.size)
     }
 
     private fun initRecyclerView() {

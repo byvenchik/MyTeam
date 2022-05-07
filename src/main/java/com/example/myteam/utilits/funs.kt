@@ -121,3 +121,9 @@ fun getFilenameFromUri(uri: Uri): String {
         return result
     }
 }
+
+//Функция для кол-ва участников
+
+fun getPlurals(count:Int) = APP_ACTIVITY.resources.getQuantityString(
+    R.plurals.count_members,count,count
+)
