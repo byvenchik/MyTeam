@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.screens.base.BaseFragment
@@ -18,12 +19,14 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.title = "Настройки профиля"
         setHasOptionsMenu(true)
         initFields()
     }
 
     //Инициализация для отображения данных
     private fun initFields() {
+
         settings_bio.text = USER.bio
         settings_full_name.text = USER.fullname
         settings_phone_number.text = USER.phone
@@ -33,7 +36,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         //Переходы
         settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         settings_btn_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
-        settings_change_photo.setOnClickListener { changePhotoUser() }
+        settings_user_photo.setOnClickListener { changePhotoUser() }
 
         settings_user_photo.downloadAndSetImage(USER.photoUrl) //Фото юзера
     }

@@ -20,6 +20,8 @@ class HolderVoiceMessage(view: View) : RecyclerView.ViewHolder(view), MessageHol
     private val blocUserVoiceMessage: ConstraintLayout = view.bloc_user_voice_message
     private val chatUserVoiceMessageTime: TextView = view.chat_user_voice_message_time
     private val chatReceivedVoiceMessageTime: TextView = view.chat_received_voice_message_time
+    private val chatReceivedLabel:TextView = view.chat_received_label_voice
+    private val chatUserLabel:TextView = view.chat_user_label_voice
 
     private val chatReceivedBtnPlay: ImageView = view.chat_received_btn_play
     private val chatReceivedBtnStop: ImageView = view.chat_received_btn_stop
@@ -34,13 +36,15 @@ class HolderVoiceMessage(view: View) : RecyclerView.ViewHolder(view), MessageHol
             //То мы его будем отражать в блоке юзера
             blocReceivedVoiceMessage.visibility = View.GONE
             blocUserVoiceMessage.visibility = View.VISIBLE
-            chatUserVoiceMessageTime.text =
-                view.timeStamp.asTime()
+            chatUserLabel.visibility = View.VISIBLE
+            chatUserVoiceMessageTime.text = view.timeStamp.asTime()
+
         } else {
             blocReceivedVoiceMessage.visibility = View.VISIBLE
+            chatReceivedLabel.visibility = View.VISIBLE
             blocUserVoiceMessage.visibility = View.GONE
-            chatReceivedVoiceMessageTime.text =
-                view.timeStamp.asTime()
+            chatReceivedVoiceMessageTime.text = view.timeStamp.asTime()
+
         }
     }
 

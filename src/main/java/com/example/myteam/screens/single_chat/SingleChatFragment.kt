@@ -110,7 +110,7 @@ class SingleChatFragment(private val contact: CommonModel) :
                         chat_btn_voice.setColorFilter(
                             ContextCompat.getColor(
                                 APP_ACTIVITY,
-                                R.color.colorGreen
+                                R.color.micro
                             )
                         )
                         val messageKey = getMessageKey(contact.id)

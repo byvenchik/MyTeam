@@ -19,21 +19,32 @@
             android:id="@+id/chat_received_btn_play"
             android:layout_width="@dimen/chat_btn_width"
             android:layout_height="@dimen/chat_btn_height"
-            android:src="@drawable/ic_play_blue"
+            android:src="@drawable/ic_play_received"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
             android:id="@+id/chat_received_btn_stop"
             android:layout_width="@dimen/chat_btn_width"
             android:layout_height="@dimen/chat_btn_height"
-            android:src="@drawable/ic_stop_blue"
+            android:src="@drawable/ic_stop_received"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/chat_received_label_voice"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:text="@string/voice_message"
+            android:textColor="@color/white"
+            style="@style/normalText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_received_voice_message_time"/>
 
         <TextView
             android:id="@+id/chat_received_voice_message_time"
@@ -41,10 +52,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_small_margin"
             android:gravity="end"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="21:45" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +72,7 @@
             android:id="@+id/chat_user_btn_play"
             android:layout_width="@dimen/chat_btn_width"
             android:layout_height="@dimen/chat_btn_height"
-            android:src="@drawable/ic_play_green"
+            android:src="@drawable/ic_play_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,12 +81,23 @@
             android:id="@+id/chat_user_btn_stop"
             android:layout_width="@dimen/chat_btn_width"
             android:layout_height="@dimen/chat_btn_height"
-            android:src="@drawable/ic_stop_green"
+            android:src="@drawable/ic_stop_user"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/chat_user_label_voice"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:text="@string/voice_message"
+            android:textColor="@color/white"
+            style="@style/normalText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_user_voice_message_time"/>
 
         <TextView
             android:id="@+id/chat_user_voice_message_time"
@@ -82,10 +105,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_small_margin"
             android:gravity="end"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="21:45" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

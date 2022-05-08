@@ -2,13 +2,13 @@
     <string name="app_name">MyTeam</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="settings_default_username">Venya Shirshikov</string>
+    <string name="settings_default_username">Новый пользователь</string>
     <string name="settings_default_status">в сети</string>
     <string name="settings_text_account">Аккаунт</string>
     <string name="settings_default_number">+79182439379</string>
-    <string name="settings_label_phone_number">Нажмите, чтобы изменить номер телефона</string>
+    <string name="settings_label_phone_number">Ваш номер телефона</string>
     <string name="settings_default_login">by_venchik</string>
-    <string name="settings_label_login">Имя пользователя</string>
+    <string name="settings_label_login">Нажмите, чтобы изменить имя пользователя</string>
     <string name="settings_default_bio">О себе</string>
     <string name="settings_label_bio">Напишите немного о себе</string>
     <string name="settings_menu_change_name">Изменить имя</string>
@@ -24,8 +24,8 @@
     <string name="sttings_hint_input_surname">Фамилия</string>
     <string name="settings_toast_name_is_empty">Имя не может быть пустым</string>
     <string name="toast_data_update">Данные обновлены</string>
-    <string name="settings_hint_input_username">username</string>
-    <string name="settings_input_bio">bio</string>
+    <string name="settings_hint_input_username">Имя пользователя</string>
+    <string name="settings_input_bio">О себе</string>
     <string name="clear_history_chat">Очистить историю</string>
     <string name="delete_chat">Удалить чат</string>
 

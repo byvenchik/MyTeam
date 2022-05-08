@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="@dimen/app_margin"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:backgroundTint="@color/green_custom"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
