@@ -17,8 +17,6 @@ class GroupListFragment : BaseFragment(R.layout.fragment_group_list) {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: GroupListAdapter
     private val mRefChatsList = REF_DATABASE_ROOT.child(NODE_GROUP_LIST).child(CURRENT_UID)
-    private val mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS)
-    private val mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
     private var mListItems = listOf<CommonModel>()
 
     override fun onResume() {

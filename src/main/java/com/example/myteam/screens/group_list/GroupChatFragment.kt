@@ -110,7 +110,7 @@ class GroupChatFragment(private val group: CommonModel) :
                         chat_btn_voice.setColorFilter(
                             ContextCompat.getColor(
                                 APP_ACTIVITY,
-                                R.color.colorGreen
+                                R.color.micro
                             )
                         )
                         val messageKey = getMessageKey(group.id)
@@ -268,7 +268,7 @@ class GroupChatFragment(private val group: CommonModel) :
             mToolbarInfo.toolbar_chat_fullname.text = group.fullname
         } else mToolbarInfo.toolbar_chat_fullname.text = mReceivingUser.fullname
 
-        mToolbarInfo.toolbar_chat_image.downloadAndSetImage(mReceivingUser.photoUrl)
+        mToolbarInfo.toolbar_chat_image.downloadAndSetImage(group.photoUrl)
         mToolbarInfo.toolbar_chat_status.text = mReceivingUser.state
     }
 

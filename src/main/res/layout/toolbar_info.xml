@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/def_user"
+        android:src="@drawable/default_photo"
         app:civ_circle_background_color="@color/white"/>
 
     <TextView

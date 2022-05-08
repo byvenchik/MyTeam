@@ -10,7 +10,7 @@
         android:layout_width="@dimen/settings_user_photo_width"
         android:layout_height="@dimen/settings_user_photo_height"
         android:layout_margin="@dimen/app_margin"
-        android:src="@drawable/group_def"
+        android:src="@drawable/default_group"
         app:civ_circle_background_color="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

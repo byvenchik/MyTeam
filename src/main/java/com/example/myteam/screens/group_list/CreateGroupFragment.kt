@@ -35,7 +35,6 @@ class CreateGroupFragment(private var listContacts: List<CommonModel>) :
                 showToast("Введите название команды")
             } else {
                 createGroupToDatabase(nameGroup,mUri,listContacts){
-
                     replaceFragment(GroupListFragment())
                 }
             }

@@ -11,7 +11,7 @@
         android:id="@+id/chat_list_item_photo"
         android:layout_width="@dimen/settings_user_photo_width"
         android:layout_height="@dimen/settings_user_photo_height"
-        android:src="@drawable/def_user"
+        android:src="@drawable/default_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

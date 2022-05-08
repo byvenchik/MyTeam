@@ -43,8 +43,8 @@ class GroupListAdapter: RecyclerView.Adapter<GroupListAdapter.GroupListHolder>()
         holder.itemName.text = listItems[position].fullname
         holder.itemLastMessage.text = listItems[position].lastMessage
         holder.itemPhoto.downloadAndSetImage(listItems[position].photoUrl)
-    }
 
+    }
     fun updateListItems(item:CommonModel){
         listItems.add(item)
         notifyItemInserted(listItems.size)

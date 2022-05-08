@@ -61,7 +61,7 @@ fun ImageView.downloadAndSetImage(url: String) {
     Picasso.get()   //Качаем изображение
         .load(url)
         .fit()  //Чтобы изображение встало в размер
-        .placeholder(R.drawable.def_user)  //Картинка которая установится
+        .placeholder(R.drawable.default_photo)  //Картинка которая установится
         .into(this) //Куда установить картинку
 }
 
