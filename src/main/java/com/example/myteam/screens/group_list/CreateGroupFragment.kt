@@ -3,6 +3,7 @@ package com.example.myteam.screens.group_list
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*

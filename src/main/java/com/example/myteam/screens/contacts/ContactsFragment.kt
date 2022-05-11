@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
@@ -18,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*
 import kotlinx.android.synthetic.main.fragment_contacts.*
 
-class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
+class ContactsFragment : Fragment(R.layout.fragment_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
 
@@ -39,6 +40,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
         APP_ACTIVITY.title = "Контакты"
         initRecycleView()
     }
@@ -85,14 +87,10 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                     //Установим на каждый контакт слушатель клика
                     holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(model)) }
                 }
-
-
                 mRefUser.addValueEventListener(mRefUserListener)
                 mapListeners[mRefUser] = mRefUserListener
             }
-
         }
-
         mRecyclerView.adapter = mAdapter
         mAdapter.startListening()
     }

@@ -1,5 +1,6 @@
 package com.example.myteam.screens.group_list
 
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_chat_list.*
 import kotlinx.android.synthetic.main.fragment_group_list.*
 
 
-class GroupListFragment : BaseFragment(R.layout.fragment_group_list) {
+class GroupListFragment : Fragment(R.layout.fragment_group_list) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: GroupListAdapter
@@ -21,7 +22,8 @@ class GroupListFragment : BaseFragment(R.layout.fragment_group_list) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Команда"
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
+        APP_ACTIVITY.title = "Моя команда"
         initRecyclerView()
     }
 
@@ -58,5 +60,4 @@ class GroupListFragment : BaseFragment(R.layout.fragment_group_list) {
         })
         mRecyclerView.adapter = mAdapter
     }
-
 }

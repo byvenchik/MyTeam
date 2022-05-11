@@ -5,8 +5,7 @@ import com.example.myteam.database.*
 //Типобезопасное перечисление состояний
 enum class AppStates(val state: String) {
     ONLINE("в сети"),
-    OFFLINE("был(а) недавно"),
-    TYPING("печатает");
+    OFFLINE("был(а) недавно");
 
     //Для отправки состояния в БД
     companion object {

@@ -15,30 +15,39 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="220dp">
 
         <TextView
             android:id="@+id/chat_user_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
             style="@style/normalText"
-            android:padding="@dimen/appPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_small_margin"
+            android:layout_marginEnd="@dimen/app_small_margin"
+            android:gravity="fill_horizontal"
+            android:paddingStart="@dimen/app_small_margin"
+            android:paddingEnd="@dimen/app_small_margin"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Привет я Веня" />
 
         <TextView
             android:id="@+id/chat_user_message_time"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_small_margin"
-            android:gravity="end"
+            android:textAlignment="viewEnd"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chat_user_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_user_message"
             tools:text="21:45" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,33 +56,50 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:background="@drawable/bg_receiving_message"
-        android:visibility="gone"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="250dp">
 
         <TextView
             android:id="@+id/chat_received_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
             style="@style/normalText"
-            android:padding="@dimen/appPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_small_margin"
+            android:gravity="start"
+            android:paddingEnd="@dimen/app_small_margin"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Привет я Друг" />
+            tools:text="Привет!" />
+
+        <TextView
+            android:id="@+id/chat_received_message_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            android:gravity="left"
+            android:textColor="@color/green_custom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/chat_received_message_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat_received_message"
+            tools:text="Николай Путин" />
 
         <TextView
             android:id="@+id/chat_received_message_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_small_margin"
-            android:gravity="end"
-            android:textColor="@color/white"
+            android:gravity="start"
+            android:textColor="@color/green_custom"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chat_received_message"
+            app:layout_constraintTop_toBottomOf="@id/chat_received_message"
             tools:text="21:45" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

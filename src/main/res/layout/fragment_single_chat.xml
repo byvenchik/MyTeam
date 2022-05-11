@@ -41,6 +41,7 @@
             android:background="@color/gray_custom"
             android:hint="Сообщение"
             android:padding="@dimen/appPadding"
+            android:inputType="textCapSentences"
             android:textColor="@color/white"
             android:textColorHint="@color/whiteDark"
             app:layout_constraintBottom_toBottomOf="parent"

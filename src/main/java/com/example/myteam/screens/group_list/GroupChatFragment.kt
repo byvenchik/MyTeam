@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myteam.R
 import com.example.myteam.database.*
-import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.message_recycler_view.views.AppViewFactory
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
-import com.example.myteam.screens.chat_list.ChatListFragment
+import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
@@ -328,11 +327,11 @@ class GroupChatFragment(private val group: CommonModel) :
         when(item.itemId){
             R.id.menu_clear_chat -> clearChat(group.id){
                 showToast("История сообщений удалена")
-                replaceFragment(ChatListFragment())
+                replaceFragment(GroupListFragment())
             }
             R.id.menu_delete_chat -> deleteChat(group.id){
                 showToast("Чат удален")
-                replaceFragment(ChatListFragment())
+                replaceFragment(GroupListFragment())
             }
         }
         return true

@@ -42,12 +42,11 @@ fun replaceFragment(
             .replace(R.id.data_container, fragment)
             .commit()
     } else {
-        APP_ACTIVITY.supportFragmentManager.beginTransaction()   //Добавляем фрагмент уже без добавления в стек
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
             .replace(R.id.data_container, fragment)
             .commit()
     }
 }
-
 
 //Функция скрывает клавиатуру
 fun hideKeyboard() {
@@ -106,23 +105,24 @@ fun String.asTime(): String {
     return timeFormat.format(time)
 }
 
+//Функция для получения uri загружаемого файла
 fun getFilenameFromUri(uri: Uri): String {
     var result = ""
-    val cursor = APP_ACTIVITY.contentResolver.query(uri,null,null,null,null)
+    val cursor = APP_ACTIVITY.contentResolver.query(uri, null, null, null, null)
     try {
-        if(cursor!=null && cursor.moveToFirst()){
+        if (cursor != null && cursor.moveToFirst()) {
             result = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))
         }
-    }catch (e:Exception){
+    } catch (e: Exception) {
         showToast(e.message.toString())
-    }finally {
+    } finally {
         cursor?.close()
         return result
     }
 }
 
 //Функция для кол-ва участников
-
-fun getPlurals(count:Int) = APP_ACTIVITY.resources.getQuantityString(
-    R.plurals.count_members,count,count
+fun getPlurals(count: Int) = APP_ACTIVITY.resources.getQuantityString(
+    R.plurals.count_members, count, count
 )
+

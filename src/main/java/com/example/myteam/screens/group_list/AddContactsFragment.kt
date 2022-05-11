@@ -1,5 +1,8 @@
 package com.example.myteam.screens.group_list
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
@@ -12,7 +15,7 @@ import com.example.myteam.utilits.showToast
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
 
-class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
+class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AddContactsAdapter
@@ -23,6 +26,7 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
         listContacts.clear()    //Очистка списка добавленных контактов
         APP_ACTIVITY.title = "Добавить участника"
         initRecyclerView()

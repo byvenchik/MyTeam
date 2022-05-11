@@ -10,6 +10,7 @@ import com.example.myteam.screens.contacts.ContactsFragment
 import com.example.myteam.screens.settings.SettingsFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
+import com.example.myteam.screens.StatisticsFragment
 import com.example.myteam.screens.chat_list.ChatListFragment
 import com.example.myteam.screens.group_list.AddContactsFragment
 import com.example.myteam.screens.group_list.GroupListFragment
@@ -74,41 +75,47 @@ class AppDrawer {
 
                 PrimaryDrawerItem().withIdentifier(1)
                     .withIconTintingEnabled(true)
+                    .withName("Моя статистика")
+                    .withSelectable(false)
+                    .withIcon(R.drawable.ic_menu_analytics),
+
+                PrimaryDrawerItem().withIdentifier(2)
+                    .withIconTintingEnabled(true)
                     .withName("Личные сообщения")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_chats),
 
-                PrimaryDrawerItem().withIdentifier(2)
+                PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
                     .withName("Моя команда")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_groups),
 
-                PrimaryDrawerItem().withIdentifier(3)
+                PrimaryDrawerItem().withIdentifier(4)
                     .withIconTintingEnabled(true)
                     .withName("Создать команду")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_group_add),
 
-                PrimaryDrawerItem().withIdentifier(4)
+                PrimaryDrawerItem().withIdentifier(5)
                     .withIconTintingEnabled(true)
                     .withName("Создать задачу")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_task_add),
 
-                PrimaryDrawerItem().withIdentifier(5)
+                PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)
                     .withName("Мои задачи")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_task),
 
-                PrimaryDrawerItem().withIdentifier(6)
+                PrimaryDrawerItem().withIdentifier(7)
                     .withIconTintingEnabled(true)
                     .withName("Контакты")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_contacts),
 
-                PrimaryDrawerItem().withIdentifier(7)
+                PrimaryDrawerItem().withIdentifier(8)
                     .withIconTintingEnabled(true)
                     .withName("Настройки")
                     .withSelectable(false)
@@ -116,13 +123,13 @@ class AppDrawer {
 
                 DividerDrawerItem(),
 
-                PrimaryDrawerItem().withIdentifier(8)
+                PrimaryDrawerItem().withIdentifier(9)
                     .withIconTintingEnabled(true)
                     .withName("Пригласить друзей")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_person_add),
 
-                PrimaryDrawerItem().withIdentifier(9)
+                PrimaryDrawerItem().withIdentifier(10)
                     .withIconTintingEnabled(true)
                     .withName("Вопросы о MyTeam")
                     .withSelectable(false)
@@ -142,12 +149,13 @@ class AppDrawer {
 
     private fun clickToItem(position: Int) {
         when (position) {
-            1 -> replaceFragment(ChatListFragment())
-            2 -> replaceFragment(GroupListFragment())
-            3 -> replaceFragment(AddContactsFragment())
+            1 -> replaceFragment(StatisticsFragment())
+            2 -> replaceFragment(ChatListFragment())
+            3 -> replaceFragment(GroupListFragment())
+            4 -> replaceFragment(AddContactsFragment())
 
-            6 -> replaceFragment(ContactsFragment())
-            7 -> replaceFragment(SettingsFragment())
+            7 -> replaceFragment(ContactsFragment())
+            8 -> replaceFragment(SettingsFragment())
         }
     }
 

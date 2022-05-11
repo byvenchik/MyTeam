@@ -4,10 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myteam.database.CHILD_USERNAME
 import com.example.myteam.database.CURRENT_UID
-import com.example.myteam.database.NODE_USERNAMES
-import com.example.myteam.database.REF_DATABASE_ROOT
 import com.example.myteam.message_recycler_view.views.MessageView
 import com.example.myteam.utilits.asTime
 import kotlinx.android.synthetic.main.message_item_text.view.*
@@ -21,6 +18,7 @@ class HolderTextMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
     private val blocReceivedMessage: ConstraintLayout = view.bloc_received_message
     private val chatReceivedMessage: TextView = view.chat_received_message
     private val chatReceivedMessageTime: TextView = view.chat_received_message_time
+    private val chatReceivedMessageUsername:TextView = view.chat_received_message_username
 
 
     override fun drawMessage(view: MessageView) {
@@ -43,6 +41,7 @@ class HolderTextMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
 
             chatReceivedMessage.text = view.text
             chatReceivedMessageTime.text = view.timeStamp.asTime()
+            chatReceivedMessageUsername.text = view.from_username
         }
     }
 

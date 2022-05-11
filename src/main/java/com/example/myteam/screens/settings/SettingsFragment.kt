@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.screens.base.BaseFragment
@@ -15,10 +16,11 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 //Фрагмент настроек
-class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
+class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
         APP_ACTIVITY.title = "Настройки профиля"
         setHasOptionsMenu(true)
         initFields()
@@ -26,18 +28,15 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     //Инициализация для отображения данных
     private fun initFields() {
-
         settings_bio.text = USER.bio
         settings_full_name.text = USER.fullname
         settings_phone_number.text = USER.phone
         settings_status.text = USER.state
         settings_username.text = USER.username
-
         //Переходы
         settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         settings_btn_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
         settings_user_photo.setOnClickListener { changePhotoUser() }
-
         settings_user_photo.downloadAndSetImage(USER.photoUrl) //Фото юзера
     }
 

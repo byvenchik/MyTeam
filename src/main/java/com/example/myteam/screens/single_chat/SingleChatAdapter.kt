@@ -8,9 +8,7 @@ import com.example.myteam.message_recycler_view.views.MessageView
 class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mlistMessagesCache = mutableListOf<MessageView>()
-
     private var mListHolders = mutableListOf<MessageHolder>()
-
 
     //Создал холдер
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,7 +21,6 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     //Здесь передаем размер нашего mlistMessagesCache
     override fun getItemCount(): Int = mlistMessagesCache.size
-
 
     //Отражает холдер
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

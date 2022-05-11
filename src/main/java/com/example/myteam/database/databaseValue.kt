@@ -32,13 +32,13 @@ const val CHILD_STATE = "state"
 
 //Добавил для сообщений
 const val CHILD_TEXT = "text"
+const val CHILD_FROM_USERNAME = "from_username"
 const val CHILD_TYPE = "type"
 const val CHILD_FROM = "from"
 const val CHILD_TIME_STAMP = "timeStamp"
 const val CHILD_FILE_URL = "fileUrl"
 const val FOLDER_PROFILE_IMAGE = "profile_image"    //Папка для хранения изображений
 const val FOLDER_FILES = "messages_files"
-
 
 //Для чатов
 const val NODE_CHAT_LIST = "chat_list"
@@ -51,4 +51,7 @@ const val FOLDER_GROUPS_IMAGE = "groups_image"
 const val USER_CREATOR = "creator"
 const val USER_ADMIN = "admin"
 const val USER_MEMBER = "member"
+
+const val NODE_STATISTICS = "statistics"
+const val CHILD_RAITING = "raiting"
 

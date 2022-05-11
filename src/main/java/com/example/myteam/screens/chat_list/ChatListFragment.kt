@@ -1,5 +1,6 @@
 package com.example.myteam.screens.chat_list
 
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
@@ -11,8 +12,7 @@ import com.example.myteam.utilits.TYPE_CHAT
 import com.example.myteam.utilits.TYPE_GROUP
 import kotlinx.android.synthetic.main.fragment_chat_list.*
 
-
-class ChatListFragment : BaseFragment(R.layout.fragment_chat_list) {
+class ChatListFragment : Fragment(R.layout.fragment_chat_list) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: ChatListAdapter
@@ -23,7 +23,8 @@ class ChatListFragment : BaseFragment(R.layout.fragment_chat_list) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Чаты"
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
+        APP_ACTIVITY.title = "Личные сообщения"
         initRecyclerView()
     }
 

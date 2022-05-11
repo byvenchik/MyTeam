@@ -114,7 +114,6 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
     mapMessage[CHILD_TYPE] = typeText
     mapMessage[CHILD_TEXT] = message    //Сообщение
     mapMessage[CHILD_ID] = messageKey.toString()
-
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
 
     val mapDialog = hashMapOf<String, Any>()
@@ -267,6 +266,16 @@ fun deleteChat(id: String, function: () -> Unit) {
         .child(CURRENT_UID)
         .child(id)
         .removeValue()
+    REF_DATABASE_ROOT
+        .child(NODE_MESSAGES)
+        .child(CURRENT_UID)
+        .child(id)
+        .removeValue()
+    REF_DATABASE_ROOT
+        .child(NODE_MESSAGES)
+        .child(id)
+        .child(CURRENT_UID)
+        .removeValue()
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
@@ -303,7 +312,7 @@ fun createGroupToDatabase(
     val mapData = hashMapOf<String, Any>()
     mapData[CHILD_ID] = keyGroup
     mapData[CHILD_FULLNAME] = nameGroup
-    mapData[CHILD_PHOTO_URL]="empty"
+    mapData[CHILD_PHOTO_URL] = "empty"
 
     val mapMembers = hashMapOf<String, Any>()
     listContacts.forEach {
@@ -320,13 +329,13 @@ fun createGroupToDatabase(
                 putFileToStorage(uri, pathStorage) {
                     getUrlFromStorage(pathStorage) {
                         path.child(CHILD_PHOTO_URL).setValue(it)
-                        addGroupsToGroopList(mapData,listContacts){
+                        addGroupsToGroopList(mapData, listContacts) {
                             function()
                         }
                     }
                 }
-            } else{
-                addGroupsToGroopList(mapData,listContacts){
+            } else {
+                addGroupsToGroopList(mapData, listContacts) {
                     function()
                 }
             }
@@ -341,7 +350,7 @@ fun addGroupsToGroopList(
     function: () -> Unit
 ) {
     val path = REF_DATABASE_ROOT.child(NODE_GROUP_LIST)
-    val map = hashMapOf<String,Any>()
+    val map = hashMapOf<String, Any>()
 
     map[CHILD_ID] = mapData[CHILD_ID].toString()
     map[CHILD_TYPE] = TYPE_GROUP
@@ -354,25 +363,22 @@ fun addGroupsToGroopList(
         .addOnFailureListener { showToast(it.message.toString()) }
 }
 
+/*Отправка сообщений в групповой чат*/
 fun sendMessageToGroup(message: String, groupID: String, typeText: String, function: () -> Unit) {
 
-//Создаем текстовую ссылку для моментального обновления
-    var refMessages = "$NODE_GROUPS/$groupID/$NODE_MESSAGES"
-        //Уникальный ключ для сообщения
+    val refMessages = "$NODE_GROUPS/$groupID/$NODE_MESSAGES"
     val messageKey = REF_DATABASE_ROOT.child(refMessages).push().key
-    //Map
+
     val mapMessage = hashMapOf<String, Any>()
-    mapMessage[CHILD_FROM] = CURRENT_UID    //Отправитель
+    mapMessage[CHILD_FROM] = CURRENT_UID
+    mapMessage[CHILD_FROM_USERNAME] = USER.fullname
     mapMessage[CHILD_TYPE] = typeText
-    mapMessage[CHILD_TEXT] = message    //Сообщение
+    mapMessage[CHILD_TEXT] = message
     mapMessage[CHILD_ID] = messageKey.toString()
-
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
-
 
     REF_DATABASE_ROOT.child(refMessages).child(messageKey.toString())
         .updateChildren(mapMessage)
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
-
 }

@@ -7,6 +7,7 @@ interface MessageView {
     val timeStamp: String
     val fileUrl: String
     val text: String
+    val from_username:String
 
     //Здесь надо отобразить переменные, которые будут отображать тип View
     companion object {

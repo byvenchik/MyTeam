@@ -9,6 +9,7 @@ data class CommonModel(
     var state: String = "",
     var photoUrl: String = "empty",  //Крашилось при новом пользователе
     var phone: String = "",
+    var from_username: String = "",
 
 //Свойства для сообщений
     var text: String = "",

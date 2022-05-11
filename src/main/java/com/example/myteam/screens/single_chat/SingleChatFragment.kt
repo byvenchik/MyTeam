@@ -48,7 +48,8 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mRecyclerView: RecyclerView
 
     //Чтобы избегать утечки памяти нужен объект слушателя
-    private lateinit var mMessagesListener: AppChildEventListener  //Было двойное обновление, будем дочернюю ноду слушать
+    //Было двойное обновление, будем дочернюю ноду слушать
+    private lateinit var mMessagesListener: AppChildEventListener
 
     //Переменная для необходимого количества подгруженных сообщений
     private var mCountMessages = 10
@@ -210,7 +211,8 @@ class SingleChatFragment(private val contact: CommonModel) :
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 //Какое на данный момент состояние
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {//Состояние когда пользователь начинает движение
+                //Состояние когда пользователь начинает движение
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     mIsScrolling = true
                 }
             }
@@ -338,5 +340,4 @@ class SingleChatFragment(private val contact: CommonModel) :
         }
         return true
     }
-
 }

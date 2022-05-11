@@ -38,14 +38,13 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                 dateMap[CHILD_ID] = uid
                 dateMap[CHILD_PHONE] = phoneNumber
 
-
                 REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
                     .addListenerForSingleValueEvent(AppValueEventListener {
 
                         //Проверка для юзернейм
                         //Если в нашей ноде нет такого чаилда,только в этом случае присваивание
 
-                        if(!it.hasChild(CHILD_USERNAME)){
+                        if (!it.hasChild(CHILD_USERNAME)) {
                             //CHILD_USERNAME потом можно будет изменить
                             dateMap[CHILD_USERNAME] = uid
                         }
@@ -67,11 +66,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                                     }
                                     .addOnFailureListener { showToast(it.message.toString()) }
                             }
-
-
                     })
-
-
             } else showToast(task.exception?.message.toString())
         }
     }

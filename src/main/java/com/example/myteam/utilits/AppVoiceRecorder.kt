@@ -8,7 +8,6 @@ import java.io.File
 
 class AppVoiceRecorder {
 
-
     private val mMediaRecorder = MediaRecorder()
 
     //Файл для хранения данных

@@ -5,7 +5,9 @@ class ViewTextMessage(
     override val from: String,
     override val timeStamp: String,
     override val fileUrl: String="",
-    override val text: String
+    override val text: String,
+    override val from_username: String
+
 ) : MessageView {
     override fun getTypeView(): Int {
         return MessageView.MESSAGE_TEXT
