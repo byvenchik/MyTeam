@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import com.example.myteam.database.AUTH
 import com.example.myteam.database.initFirebase
 import com.example.myteam.database.initUser
@@ -13,6 +14,7 @@ import com.example.myteam.screens.StatisticsFragment
 import com.example.myteam.screens.register.EnterPhoneNumberFragment
 import com.example.myteam.objects.AppDrawer
 import com.example.myteam.utilits.*
+import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     lateinit var mAppDrawer: AppDrawer
     lateinit var mToolbar: Toolbar
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
 
     // Функция запускается один раз, при создании активити
     override fun onCreate(savedInstanceState: Bundle?) {
