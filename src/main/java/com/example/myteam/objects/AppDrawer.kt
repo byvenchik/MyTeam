@@ -12,6 +12,7 @@ import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
 import com.example.myteam.screens.StatisticsFragment
 import com.example.myteam.screens.chat_list.ChatListFragment
+import com.example.myteam.screens.get_tasks.ChoiceContactsForTasksFragment
 import com.example.myteam.screens.group_list.AddContactsFragment
 import com.example.myteam.screens.group_list.GroupListFragment
 import com.example.myteam.utilits.downloadAndSetImage
@@ -153,7 +154,7 @@ class AppDrawer {
             2 -> replaceFragment(ChatListFragment())
             3 -> replaceFragment(GroupListFragment())
             4 -> replaceFragment(AddContactsFragment())
-
+            5 -> replaceFragment(ChoiceContactsForTasksFragment())
             7 -> replaceFragment(ContactsFragment())
             8 -> replaceFragment(SettingsFragment())
         }

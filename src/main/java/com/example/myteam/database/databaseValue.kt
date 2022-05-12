@@ -52,6 +52,7 @@ const val USER_CREATOR = "creator"
 const val USER_ADMIN = "admin"
 const val USER_MEMBER = "member"
 
-const val NODE_STATISTICS = "statistics"
-const val CHILD_RAITING = "raiting"
+const val NODE_TASKS = "tasks"
 
+const val CHILD_TASK = "task"
+const val CHILD_DESCRIPTION = "description"

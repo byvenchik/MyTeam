@@ -4,6 +4,7 @@ import android.net.Uri
 import com.example.myteam.R
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
+import com.example.myteam.screens.group_list.AddContactsFragment.Companion.listContacts
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
 import com.example.myteam.utilits.TYPE_GROUP
@@ -382,3 +383,34 @@ fun sendMessageToGroup(message: String, groupID: String, typeText: String, funct
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
+
+/*Для отправки задач*/
+
+fun sendTaskToDatabase(
+    task: String,
+    description: String,
+    receivingUserID: String,
+    type: String
+) {
+    val refTaskUser = "$NODE_TASKS/$CURRENT_UID/$receivingUserID"
+    val refTaskReceived = "$NODE_TASKS/$receivingUserID/$CURRENT_UID"
+    val messageKey = REF_DATABASE_ROOT.child(refTaskUser).push().key
+    //Map
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] = CURRENT_UID
+    mapMessage[CHILD_FROM_USERNAME] = USER.fullname
+    mapMessage[CHILD_ID] = messageKey.toString()
+    mapMessage[CHILD_TASK] = task
+    mapMessage[CHILD_DESCRIPTION] = description
+    mapMessage[CHILD_TYPE] = type
+    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
+
+    val mapTask = hashMapOf<String, Any>()
+    mapTask["$refTaskUser/$messageKey"] = mapMessage
+    mapTask["$refTaskReceived/$messageKey"] = mapMessage
+
+    REF_DATABASE_ROOT
+        .updateChildren(mapTask)
+}
+
+
