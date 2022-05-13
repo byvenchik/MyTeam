@@ -386,7 +386,7 @@ fun sendMessageToGroup(message: String, groupID: String, typeText: String, funct
 
 /*Для отправки задач*/
 
-fun sendTaskToDatabase(
+/*fun sendTaskToDatabase(
     task: String,
     description: String,
     receivingUserID: String,
@@ -411,6 +411,27 @@ fun sendTaskToDatabase(
 
     REF_DATABASE_ROOT
         .updateChildren(mapTask)
-}
+}*/
 
+fun testSendMessage(message: String, receivingUserID: String, typeText: String, function: () -> Unit) {
+    val refTaskUser = "$NODE_TASKS/$NODE_SENDER/$CURRENT_UID"
+    val refTaskReceivingUser = "$NODE_TASKS/$NODE_RECEIVER/$receivingUserID"
+    val taskKey = REF_DATABASE_ROOT.child(refTaskUser).push().key
+
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] = CURRENT_UID
+    mapMessage[CHILD_TYPE] = typeText
+    mapMessage[CHILD_TEXT] = message
+    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
+
+    val mapDialog = hashMapOf<String,Any>()
+    mapDialog["$refTaskUser/$taskKey"] = mapMessage
+    mapDialog["$refTaskReceivingUser/$taskKey"] = mapMessage
+
+    REF_DATABASE_ROOT
+        .updateChildren(mapDialog)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
+
+}
 

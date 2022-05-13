@@ -10,7 +10,7 @@ import com.example.myteam.database.AUTH
 import com.example.myteam.database.initFirebase
 import com.example.myteam.database.initUser
 import com.example.myteam.databinding.ActivityMainBinding
-import com.example.myteam.screens.StatisticsFragment
+import com.example.myteam.screens.main.StatisticsFragment
 import com.example.myteam.screens.register.EnterPhoneNumberFragment
 import com.example.myteam.objects.AppDrawer
 import com.example.myteam.utilits.*

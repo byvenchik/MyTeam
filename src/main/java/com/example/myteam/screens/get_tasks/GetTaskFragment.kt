@@ -38,6 +38,11 @@ class GetTaskFragment(private val contact: CommonModel)
         val description = task_input_description.text
         if(task.isEmpty()){
             showToast("Введите наименование задачи")
-        } else {sendTaskToDatabase(task.toString(),description.toString(),contact.id, TYPE_TEXT) }
+        }else{
+            testSendMessage(task.toString(),contact.id, TYPE_TEXT){
+                task_input_title.setText("")
+            }
+        }
+    //else {sendTaskToDatabase(task.toString(),description.toString(),contact.id, TYPE_TEXT) }
     }
 }

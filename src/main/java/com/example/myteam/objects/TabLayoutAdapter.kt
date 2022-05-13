@@ -1,13 +1,11 @@
 package com.example.myteam.objects
 
-import android.content.Context
-import android.net.wifi.hotspot2.pps.HomeSp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.myteam.screens.AcceptTaskFragment
-import com.example.myteam.screens.SubmitTaskFragment
-import com.example.myteam.screens.task.TaskMainFragment
+import com.example.myteam.screens.task.task_receiver.ReceiverTaskFragment
+import com.example.myteam.screens.task.task_sender.SenderTaskFragment
+
 
 class TabLayoutAdapter( fm: FragmentManager, var totalTabs: Int) :
     FragmentPagerAdapter(fm) {
@@ -15,10 +13,10 @@ class TabLayoutAdapter( fm: FragmentManager, var totalTabs: Int) :
     override fun getItem(position: Int): Fragment {
         return when(position) {
             0 -> {
-                AcceptTaskFragment()
+                ReceiverTaskFragment()
             }
             1 -> {
-                SubmitTaskFragment()
+                SenderTaskFragment()
             }
             else -> getItem(position)
         }

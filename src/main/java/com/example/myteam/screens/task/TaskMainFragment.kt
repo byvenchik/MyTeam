@@ -12,19 +12,19 @@ class TaskMainFragment : Fragment(R.layout.fragment_task_main) {
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager:ViewPager
 
-
-
     override fun onResume() {
         super.onResume()
         APP_ACTIVITY.title = "Мои задачи"
+        goPager()
+    }
 
+    fun goPager() {
         tabLayout = APP_ACTIVITY.findViewById(R.id.tablayout_for_tasks)
         viewPager = APP_ACTIVITY.findViewById(R.id.view_pager)
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = TabLayoutAdapter(APP_ACTIVITY.supportFragmentManager,tabLayout.tabCount)
         viewPager.adapter = adapter
-
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -33,6 +33,5 @@ class TaskMainFragment : Fragment(R.layout.fragment_task_main) {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
-
     }
 }

@@ -53,6 +53,8 @@ const val USER_ADMIN = "admin"
 const val USER_MEMBER = "member"
 
 const val NODE_TASKS = "tasks"
+const val NODE_RECEIVER = "receiver"
+const val NODE_SENDER = "sender"
 
 const val CHILD_TASK = "task"
 const val CHILD_DESCRIPTION = "description"
