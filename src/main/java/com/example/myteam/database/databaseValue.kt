@@ -58,3 +58,5 @@ const val NODE_SENDER = "sender"
 
 const val CHILD_TASK = "task"
 const val CHILD_DESCRIPTION = "description"
+const val CHILD_RECEIVED = "received"
+const val CHILD_RECEIVED_ID = "received_id"

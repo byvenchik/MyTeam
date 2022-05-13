@@ -16,6 +16,9 @@ import com.example.myteam.screens.get_tasks.ChoiceContactsForTasksFragment
 import com.example.myteam.screens.group_list.AddContactsFragment
 import com.example.myteam.screens.group_list.GroupListFragment
 import com.example.myteam.screens.task.TaskMainFragment
+import com.example.myteam.screens.task.task_receiver.ReceiverTaskFragment
+import com.example.myteam.screens.task.task_sender.SenderTaskAdapter
+import com.example.myteam.screens.task.task_sender.SenderTaskFragment
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
@@ -127,13 +130,13 @@ class AppDrawer {
 
                 PrimaryDrawerItem().withIdentifier(9)
                     .withIconTintingEnabled(true)
-                    .withName("Пригласить друзей")
+                    .withName("Принятые задачи ТЕСТ")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_person_add),
 
                 PrimaryDrawerItem().withIdentifier(10)
                     .withIconTintingEnabled(true)
-                    .withName("Вопросы о MyTeam")
+                    .withName("Отправленные задачи ТЕСТ")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_help)
 
@@ -156,9 +159,12 @@ class AppDrawer {
             3 -> replaceFragment(GroupListFragment())
             4 -> replaceFragment(AddContactsFragment())
             5 -> replaceFragment(ChoiceContactsForTasksFragment())
-            6 -> replaceFragment(TaskMainFragment())
+
             7 -> replaceFragment(ContactsFragment())
             8 -> replaceFragment(SettingsFragment())
+
+            10 -> replaceFragment(ReceiverTaskFragment())
+            11 -> replaceFragment(SenderTaskFragment())
 
 
 

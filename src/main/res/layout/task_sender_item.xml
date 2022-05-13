@@ -8,35 +8,90 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bloc_sender_task"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_width="match_parent"
         android:background="@drawable/bg_user_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/sender_task_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Наименование задачи"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/app_small_margin"/>
 
         <TextView
             android:id="@+id/message_sender_task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Привет я Юра"
+            tools:text="Еженедельный отчет"
+            android:maxLines="3"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
             android:textColor="@color/colorBlack"
-            android:gravity="end"
-            android:padding="@dimen/appPadding"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/sender_task_title"/>
+
+        <TextView
+            android:id="@+id/sender_task_title_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Описание задачи"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message_sender_task"
+            android:layout_marginStart="@dimen/app_small_margin"/>
+
+        <TextView
+            android:id="@+id/message_sender_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Сделать анализ по всем направлениям деятельности, структурировать, подготовить бумаги и принести мне"
+            android:maxLines="3"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sender_task_title_description"/>
 
         <TextView
             android:id="@+id/message_time_sender_task"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="21:45"
             android:textColor="@color/colorBlack"
             android:gravity="end"
             android:layout_marginEnd="@dimen/app_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message_sender_task"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/sender_task_title"/>
+
+        <TextView
+            android:id="@+id/sender_task_title_received"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Получатель"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message_sender_description"
+            android:layout_marginStart="@dimen/app_small_margin"/>
+
+        <TextView
+            android:id="@+id/sender_task_received"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вениамин Ширшиков"
+            android:textColor="@color/micro"
+            app:layout_constraintStart_toEndOf="@id/sender_task_title_received"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/app_small_margin"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -44,6 +99,7 @@
         android:id="@+id/bloc_fake_message"
         android:layout_width="wrap_content"
         android:layout_marginEnd="100dp"
+        android:visibility="gone"
         android:background="@drawable/bg_receiving_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

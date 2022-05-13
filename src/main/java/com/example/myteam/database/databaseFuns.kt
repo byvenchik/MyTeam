@@ -183,6 +183,9 @@ fun setNameToDatabase(fullname: String) {
 fun getMessageKey(id: String) = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
     .child(id).push().key.toString()
 
+fun getTaskKey(id: String) =
+    REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_SENDER).child(CURRENT_UID).child(id).push().key.toString()
+
 fun uploadFileToStorage(
     uri: Uri,
     messageKey: String,
@@ -386,52 +389,4 @@ fun sendMessageToGroup(message: String, groupID: String, typeText: String, funct
 
 /*Для отправки задач*/
 
-/*fun sendTaskToDatabase(
-    task: String,
-    description: String,
-    receivingUserID: String,
-    type: String
-) {
-    val refTaskUser = "$NODE_TASKS/$CURRENT_UID/$receivingUserID"
-    val refTaskReceived = "$NODE_TASKS/$receivingUserID/$CURRENT_UID"
-    val messageKey = REF_DATABASE_ROOT.child(refTaskUser).push().key
-    //Map
-    val mapMessage = hashMapOf<String, Any>()
-    mapMessage[CHILD_FROM] = CURRENT_UID
-    mapMessage[CHILD_FROM_USERNAME] = USER.fullname
-    mapMessage[CHILD_ID] = messageKey.toString()
-    mapMessage[CHILD_TASK] = task
-    mapMessage[CHILD_DESCRIPTION] = description
-    mapMessage[CHILD_TYPE] = type
-    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
-
-    val mapTask = hashMapOf<String, Any>()
-    mapTask["$refTaskUser/$messageKey"] = mapMessage
-    mapTask["$refTaskReceived/$messageKey"] = mapMessage
-
-    REF_DATABASE_ROOT
-        .updateChildren(mapTask)
-}*/
-
-fun testSendMessage(message: String, receivingUserID: String, typeText: String, function: () -> Unit) {
-    val refTaskUser = "$NODE_TASKS/$NODE_SENDER/$CURRENT_UID"
-    val refTaskReceivingUser = "$NODE_TASKS/$NODE_RECEIVER/$receivingUserID"
-    val taskKey = REF_DATABASE_ROOT.child(refTaskUser).push().key
-
-    val mapMessage = hashMapOf<String, Any>()
-    mapMessage[CHILD_FROM] = CURRENT_UID
-    mapMessage[CHILD_TYPE] = typeText
-    mapMessage[CHILD_TEXT] = message
-    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
-
-    val mapDialog = hashMapOf<String,Any>()
-    mapDialog["$refTaskUser/$taskKey"] = mapMessage
-    mapDialog["$refTaskReceivingUser/$taskKey"] = mapMessage
-
-    REF_DATABASE_ROOT
-        .updateChildren(mapDialog)
-        .addOnSuccessListener { function() }
-        .addOnFailureListener { showToast(it.message.toString()) }
-
-}
 

@@ -19,8 +19,12 @@ data class CommonModel(
     var fileUrl: String = "empty",
 
     var lastMessage: String = "",
-    var choice: Boolean = false
+    var choice: Boolean = false,
 
+//Cвойства для задач
+    var description: String = "",
+    var task: String = "",
+    var received:String="",
 
 ) {
     //Сравнение сообщений

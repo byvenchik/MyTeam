@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.models.CommonModel
+import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.fragment_task_receiver.*
@@ -20,6 +21,7 @@ class ReceiverTaskFragment()  : Fragment(R.layout.fragment_task_receiver) {
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.title = "Входящие задачи"
         initRecycleView()
     }
 
