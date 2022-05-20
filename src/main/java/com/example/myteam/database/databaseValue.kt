@@ -75,3 +75,6 @@ const val CHILD_GET_UNFULFILLED_TASK = "get_unfulfilled_task"
 
 const val CHILD_DECLINE_TASK = "decline_task"
 const val CHILD_GET_DECLINE_TASK = "get_decline_task"
+
+const val CHILD_PROGRESS_TASK = "progress_task"
+const val CHILD_CONTROL_TASK = "control_task"

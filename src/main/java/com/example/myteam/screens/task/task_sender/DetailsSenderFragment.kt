@@ -43,7 +43,10 @@ class DetailsSenderFragment(
     //Для отказанных задач
     private val mRefDeclineTask = REF_DATABASE_ROOT.child(NODE_STATISTICS).child(idReceived).child(CHILD_DECLINE_TASK)
     private val mRefDeclineGetTask = REF_DATABASE_ROOT.child(NODE_STATISTICS).child(USER.id).child(CHILD_GET_DECLINE_TASK)
-
+    //Задача выполняется
+    private val mRefProgressTask = REF_DATABASE_ROOT.child(NODE_STATISTICS).child(idReceived).child(CHILD_PROGRESS_TASK)
+    //Задача под контролем
+    private val mRefControlTask = REF_DATABASE_ROOT.child(NODE_STATISTICS).child(USER.id).child(CHILD_CONTROL_TASK)
 
     override fun onResume() {
         super.onResume()
@@ -181,6 +184,7 @@ class DetailsSenderFragment(
         replaceFragment(TaskMainFragment())
     }
 
+
     private fun changeGoneStatusTask(task_id: String, idReceived: String) {
         val done = "Принята"
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_SENDER).child(CURRENT_UID).child(task_id)
@@ -189,6 +193,29 @@ class DetailsSenderFragment(
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_RECEIVER).child(idReceived).child(task_id)
             .child(CHILD_STATUS_TASK)
             .setValue(done)
+
+        mRefProgressTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefProgressTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue - 1
+                mRefProgressTask.setValue(newValue)
+            }
+        }
+        mRefControlTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefControlTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue - 1
+                mRefControlTask.setValue(newValue)
+            }
+        }
     }
 
     private fun changeErrorStatusTask(task_id: String, idReceived: String) {
@@ -199,5 +226,28 @@ class DetailsSenderFragment(
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_RECEIVER).child(idReceived).child(task_id)
             .child(CHILD_STATUS_TASK)
             .setValue(done)
+
+        mRefProgressTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefProgressTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue - 1
+                mRefProgressTask.setValue(newValue)
+            }
+        }
+        mRefControlTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefControlTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue - 1
+                mRefControlTask.setValue(newValue)
+            }
+        }
     }
 }

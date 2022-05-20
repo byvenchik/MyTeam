@@ -8,4 +8,6 @@ data class UserModel(
     var state: String = "",
     var photoUrl: String = "empty",  //Крашилось при новом пользователе
     var phone: String = ""
+
+
 )

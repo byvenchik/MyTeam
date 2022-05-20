@@ -31,7 +31,12 @@ data class CommonModel(
     var received_photo:String="",
     var from_photo:String="",
 
-    var completed_task:Int= 0,
+    var completed_task:String = "",
+    var unfulfilled_task:String = "",
+    var decline_task:String = "",
+    var get_completed_task:String = "",
+    var get_unfulfilled_task:String = "",
+    var get_decline_task:String = ""
 
 
     ) {

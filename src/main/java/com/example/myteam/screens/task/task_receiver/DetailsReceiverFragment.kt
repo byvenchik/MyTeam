@@ -19,9 +19,16 @@ class DetailsReceiverFragment(
     val task_received: String,
     val photoID: String,
     val task_status: String,
-    val idSender:String
+    val idSender: String
 ) : BaseFragment(R.layout.fragment_details_receiver) {
 
+    //Задача выполняется
+    private val mRefProgressTask =
+        REF_DATABASE_ROOT.child(NODE_STATISTICS).child(USER.id).child(CHILD_PROGRESS_TASK)
+
+    //Задача под контролем
+    private val mRefControlTask =
+        REF_DATABASE_ROOT.child(NODE_STATISTICS).child(idSender).child(CHILD_CONTROL_TASK)
 
     override fun onResume() {
         super.onResume()
@@ -39,32 +46,32 @@ class DetailsReceiverFragment(
         details_receiver_description_task.text = task_description
 
         details_receiver_complete_work.setOnClickListener {
-            if(task_status != "Отправлена на проверку"){
-                changeGoneStatusTask(task_id,idSender)
+            if (task_status != "Отправлена на проверку") {
+                changeGoneStatusTask(task_id, idSender)
                 showToast("Статус задачи изменен")
                 replaceFragment(TaskMainFragment())
             } else showToast("Вы не можете выполнять задание пока оно на проверке")
 
         }
         details_receiver_error_work.setOnClickListener {
-            if(task_status != "Отправлена на проверку"){
-            changeErrorStatusTask(task_id,idSender)
-            showToast("Статус задачи изменен")
-            replaceFragment(TaskMainFragment())
+            if (task_status != "Отправлена на проверку") {
+                changeErrorStatusTask(task_id, idSender)
+                showToast("Статус задачи изменен")
+                replaceFragment(TaskMainFragment())
             } else showToast("Вы не можете отказаться от задания пока оно на проверке")
         }
         details_receiver_send_to_check_work.setOnClickListener {
-            if(task_status != "Отправлена на проверку") {
+            if (task_status != "Отправлена на проверку") {
                 if (task_status == "Выполняется") {
                     changeCheckStatusTask(task_id, idSender)
                     showToast("Статус задачи изменен")
                     replaceFragment(TaskMainFragment())
                 } else showToast("Вы не можете отправить задачу, пока не приступите к ее выполнению")
-            }else showToast("Вы не можете повторно отправить задачу, пока она на проверке")
+            } else showToast("Вы не можете повторно отправить задачу, пока она на проверке")
         }
     }
 
-    private fun changeCheckStatusTask(task_id:String,idSender:String) {
+    private fun changeCheckStatusTask(task_id: String, idSender: String) {
         val done = "Отправлена на проверку"
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_SENDER).child(idSender).child(task_id)
             .child(CHILD_STATUS_TASK)
@@ -74,7 +81,7 @@ class DetailsReceiverFragment(
             .setValue(done)
     }
 
-    private fun changeGoneStatusTask(task_id:String,idSender:String) {
+    private fun changeGoneStatusTask(task_id: String, idSender: String) {
         val done = "Выполняется"
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_SENDER).child(idSender).child(task_id)
             .child(CHILD_STATUS_TASK)
@@ -82,9 +89,32 @@ class DetailsReceiverFragment(
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_RECEIVER).child(CURRENT_UID).child(task_id)
             .child(CHILD_STATUS_TASK)
             .setValue(done)
+
+        mRefProgressTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefProgressTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue + 1
+                mRefProgressTask.setValue(newValue)
+            }
+        }
+        mRefControlTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefControlTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue + 1
+                mRefControlTask.setValue(newValue)
+            }
+        }
     }
 
-    private fun changeErrorStatusTask(task_id:String,idSender:String) {
+    private fun changeErrorStatusTask(task_id: String, idSender: String) {
         val done = "Отказ исполнителя"
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_SENDER).child(idSender).child(task_id)
             .child(CHILD_STATUS_TASK)
@@ -92,5 +122,28 @@ class DetailsReceiverFragment(
         REF_DATABASE_ROOT.child(NODE_TASKS).child(NODE_RECEIVER).child(CURRENT_UID).child(task_id)
             .child(CHILD_STATUS_TASK)
             .setValue(done)
+
+        mRefProgressTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefProgressTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue - 1
+                mRefProgressTask.setValue(newValue)
+            }
+        }
+        mRefControlTask.get().addOnSuccessListener {
+            val oldValue = it.value
+            if (oldValue == null) {
+                val firstValue: Int = 1
+                mRefControlTask.setValue(firstValue)
+            } else {
+                val convertValue = oldValue.toString().toInt()
+                val newValue = convertValue - 1
+                mRefControlTask.setValue(newValue)
+            }
+        }
     }
 }

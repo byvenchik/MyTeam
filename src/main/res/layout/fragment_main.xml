@@ -1,9 +1,286 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.main.StatisticsFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statistics_header"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:background="@color/mainColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/statistics_user_photo"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/secondMainColor"
+            android:src="@drawable/default_photo"
+            app:civ_circle_background_color="@color/whiteMain"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/statistics_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/settings_default_username"
+            android:textColor="@color/receiverTaskListGradientEnd"
+            android:textColorHint="@color/receiverTaskListGradientEnd"
+            android:textSize="@dimen/normalText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statistics_user_photo" />
+
+        <TextView
+            android:id="@+id/label_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"
+            android:layout_marginEnd="@dimen/app_small_margin"
+            android:layout_marginTop="@dimen/app_margin"
+            android:text="Выполняется"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/statistics_user_photo"/>
+
+        <TextView
+            android:id="@+id/count_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:hint="0"
+            android:textColor="@color/receiverTaskListGradientEnd"
+            android:textColorHint="@color/receiverTaskListGradientEnd"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/label_progress"
+            app:layout_constraintStart_toStartOf="@id/label_progress"
+            app:layout_constraintEnd_toEndOf="@id/label_progress"/>
+
+        <TextView
+            android:id="@+id/label_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"
+            android:layout_marginStart="@dimen/app_small_margin"
+            android:layout_marginTop="@dimen/app_margin"
+            android:text="Контролируется"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/statistics_user_photo"/>
+
+        <TextView
+            android:id="@+id/count_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:hint="0"
+            android:textColor="@color/receiverTaskListGradientEnd"
+            android:textColorHint="@color/receiverTaskListGradientEnd"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/label_control"
+            app:layout_constraintStart_toStartOf="@id/label_control"
+            app:layout_constraintEnd_toEndOf="@id/label_control"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/statistics_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/app_margin"
+        android:layout_marginTop="@dimen/app_small_margin"
+        android:text="Статистика ваших задач"
+        android:textColor="@color/mainColor"
+        android:textSize="@dimen/smallText"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/statistics_header" />
+
+    <TextView
+        android:id="@+id/statistics_label_completed"
+        style="@style/settingsSmallText"
+        android:textColor="@color/secondMainColor"
+        android:text="Выолненные задачи:"
+        android:layout_marginTop="@dimen/app_small_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label" />
+
+    <View
+        style="@style/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_completed" />
+
+    <TextView
+        android:id="@+id/statistics_label_not_completed"
+        style="@style/settingsSmallText"
+        android:textColor="@color/secondMainColor"
+        android:text="Невыолненные задачи:"
+        android:layout_marginTop="@dimen/app_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_completed" />
+
+    <View
+        style="@style/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_not_completed" />
+
+    <TextView
+        android:id="@+id/statistics_label_decline_task"
+        style="@style/settingsSmallText"
+        android:textColor="@color/secondMainColor"
+        android:text="Количество отказов от задач:"
+        android:layout_marginTop="@dimen/app_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_not_completed" />
+
+    <View
+        style="@style/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_decline_task" />
+
+    <TextView
+        android:id="@+id/statistics_label_get_completed"
+        style="@style/settingsSmallText"
+        android:textColor="@color/secondMainColor"
+        android:text="Выполненные отправленные задачи:"
+        android:layout_marginTop="@dimen/app_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_decline_task" />
+
+    <View
+        style="@style/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_get_completed" />
+
+    <TextView
+        android:id="@+id/statistics_label_not_get_completed"
+        style="@style/settingsSmallText"
+        android:textColor="@color/secondMainColor"
+        android:text="Невыполненные отправленные задачи:"
+        android:layout_marginTop="@dimen/app_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_get_completed" />
+
+    <View
+        style="@style/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_not_get_completed" />
+
+    <TextView
+        android:id="@+id/statistics_label_get_decline"
+        style="@style/settingsSmallText"
+        android:textColor="@color/secondMainColor"
+        android:text="Количество отказов от ваших задач:"
+        android:layout_marginTop="@dimen/app_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_not_get_completed" />
+
+    <View
+        style="@style/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_label_get_decline" />
+
+    <TextView
+        android:id="@+id/count_complete_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/receiverTaskListGradientEnd"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:layout_marginStart="@dimen/app_margin"
+        app:layout_constraintStart_toEndOf="@+id/statistics_label_completed"
+        app:layout_constraintTop_toTopOf="@+id/statistics_label_completed"
+        android:hint="Отсутствуют"
+        android:text="Отсутствуют"/>
+
+    <TextView
+        android:id="@+id/count_not_complete_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/receiverTaskListGradientEnd"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:layout_marginStart="@dimen/app_margin"
+        app:layout_constraintStart_toEndOf="@+id/statistics_label_not_completed"
+        app:layout_constraintTop_toTopOf="@+id/statistics_label_not_completed"
+        android:hint="Отсутствуют"
+        android:text="Отсутствуют"/>
+
+    <TextView
+        android:id="@+id/count_decline_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/receiverTaskListGradientEnd"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:layout_marginStart="@dimen/app_margin"
+        app:layout_constraintStart_toEndOf="@+id/statistics_label_decline_task"
+        app:layout_constraintTop_toTopOf="@+id/statistics_label_decline_task"
+        android:hint="Отсутствует"
+        android:text="Отсутствует"/>
+
+    <TextView
+        android:id="@+id/count_get_complete_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/receiverTaskListGradientEnd"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:layout_marginStart="@dimen/app_margin"
+        app:layout_constraintStart_toEndOf="@+id/statistics_label_get_completed"
+        app:layout_constraintTop_toTopOf="@+id/statistics_label_get_completed"
+        android:hint="Отсутствуют"
+        android:text="Отсутствуют"/>
+
+    <TextView
+        android:id="@+id/count_not_get_complete_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/receiverTaskListGradientEnd"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:layout_marginStart="@dimen/app_margin"
+        app:layout_constraintStart_toEndOf="@+id/statistics_label_not_get_completed"
+        app:layout_constraintTop_toTopOf="@+id/statistics_label_not_get_completed"
+        android:hint="Отсутствуют"
+        android:text="Отсутствуют"/>
+
+    <TextView
+        android:id="@+id/count_decline_get_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/receiverTaskListGradientEnd"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:layout_marginStart="@dimen/app_margin"
+        app:layout_constraintStart_toEndOf="@+id/statistics_label_get_decline"
+        app:layout_constraintTop_toTopOf="@+id/statistics_label_get_decline"
+        android:hint="Отсутствует"
+        android:text="Отсутствует"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
