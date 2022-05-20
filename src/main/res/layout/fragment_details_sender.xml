@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.task.task_sender.DetailsSenderFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/details_header_bloc"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/gradient_sender_details_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/details_user_photo"
+            android:layout_width="@dimen/settings_user_photo_width"
+            android:layout_height="@dimen/settings_user_photo_height"
+            android:layout_marginStart="@dimen/app_margin"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/senderTaskListGradientEnd"
+            android:src="@drawable/default_photo"
+            app:civ_circle_background_color="@color/senderTaskListGradientEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/details_full_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_margin"
+            android:hint="@string/settings_default_username"
+            android:textColor="@color/whiteMain"
+            android:textColorHint="@color/whiteMain"
+            android:textSize="@dimen/normalText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/details_user_photo"
+            app:layout_constraintTop_toTopOf="@id/details_user_photo"
+            app:layout_constraintBottom_toBottomOf="@id/details_user_photo"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/details_label_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Основная информация"
+        android:textColor="@color/senderTaskListGradientEnd"
+        android:textSize="@dimen/smallText"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/details_header_bloc" />
+
+    <TextView
+        android:id="@+id/details_label_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Задача отправлена:"
+        android:textColor="@color/senderTaskListGradientEnd"
+        android:textSize="@dimen/smallText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_label_info" />
+
+    <TextView
+        android:id="@+id/details_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="22.05.22"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintStart_toEndOf="@id/details_label_date_time"
+        app:layout_constraintTop_toBottomOf="@id/details_label_info" />
+
+    <TextView
+        android:id="@+id/details_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="11:10"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintStart_toEndOf="@id/details_date"
+        app:layout_constraintTop_toBottomOf="@id/details_label_info" />
+
+    <TextView
+        android:id="@+id/details_label_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Статус задачи:"
+        android:textColor="@color/senderTaskListGradientEnd"
+        android:textSize="@dimen/smallText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_label_date_time" />
+
+    <TextView
+        android:id="@+id/details_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Выполняется"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintStart_toEndOf="@id/details_label_status"
+        app:layout_constraintTop_toBottomOf="@id/details_label_date_time" />
+
+    <TextView
+        android:id="@+id/details_label_title_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Наименование задачи"
+        android:textColor="@color/senderTaskListGradientEnd"
+        android:textSize="@dimen/smallText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_label_status" />
+
+    <TextView
+        android:id="@+id/details_title_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/app_small_margin"
+        android:text="Подготовка отчетов для комиссии."
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_label_title_task" />
+
+    <TextView
+        android:id="@+id/details_label_description_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Описание задачи"
+        android:textColor="@color/senderTaskListGradientEnd"
+        android:textSize="@dimen/smallText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_title_task" />
+
+    <TextView
+        android:id="@+id/details_description_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Задача была отправлена без описания"
+        android:textColorHint="@color/colorBlack"
+        android:maxLines="10"
+        android:layout_marginHorizontal="@dimen/app_margin"
+        android:layout_marginTop="@dimen/app_small_margin"
+        android:text="Собрать ведомости во всех отделениях. После провести анализ. Разослать информацию всем клиентам. Подключить других сотрудников."
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_label_description_task" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_complete_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/app_margin"
+        android:backgroundTint="@color/strokeForTask"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_error_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close_task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/app_margin"
+        android:backgroundTint="@color/micro"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_star"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_star"
+        app:layout_constraintStart_toEndOf="@+id/details_error_work"
+        app:layout_constraintEnd_toStartOf="@+id/details_complete_work"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/app_margin"
+        android:backgroundTint="@color/senderTaskListGradientEnd"/>
+
+    <TextView
+        android:id="@+id/counts_completed_received"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

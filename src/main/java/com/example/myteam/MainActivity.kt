@@ -13,6 +13,7 @@ import com.example.myteam.databinding.ActivityMainBinding
 import com.example.myteam.screens.main.StatisticsFragment
 import com.example.myteam.screens.register.EnterPhoneNumberFragment
 import com.example.myteam.objects.AppDrawer
+import com.example.myteam.objects.TabLayoutAdapter
 import com.example.myteam.utilits.*
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope
@@ -25,8 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     lateinit var mAppDrawer: AppDrawer
     lateinit var mToolbar: Toolbar
-    private lateinit var tabLayout: TabLayout
-    private lateinit var viewPager: ViewPager
+
 
     // Функция запускается один раз, при создании активити
     override fun onCreate(savedInstanceState: Bundle?) {

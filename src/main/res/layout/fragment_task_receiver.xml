@@ -10,7 +10,7 @@
         android:id="@+id/receiver_task_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/whiteDark"
+        android:background="@color/whiteMain"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

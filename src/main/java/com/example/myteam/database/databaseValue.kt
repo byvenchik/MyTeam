@@ -1,5 +1,6 @@
 package com.example.myteam.database
 
+import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -57,6 +58,20 @@ const val NODE_RECEIVER = "receiver"
 const val NODE_SENDER = "sender"
 
 const val CHILD_TASK = "task"
+const val CHILD_STATUS_TASK = "status_task"
 const val CHILD_DESCRIPTION = "description"
 const val CHILD_RECEIVED = "received"
 const val CHILD_RECEIVED_ID = "received_id"
+const val CHILD_RECEIVED_PHOTO = "received_photo"
+const val CHILD_FROM_PHOTO = "from_photo"
+const val CHILD_TASK_ID = "task_id"
+
+const val NODE_STATISTICS = "statistics"
+const val CHILD_COMPLETED_TASK = "completed_task"
+const val CHILD_GET_COMPLETED_TASK = "get_completed_task"
+
+const val CHILD_UNFULFILLED_TASK = "unfulfilled_task"
+const val CHILD_GET_UNFULFILLED_TASK = "get_unfulfilled_task"
+
+const val CHILD_DECLINE_TASK = "decline_task"
+const val CHILD_GET_DECLINE_TASK = "get_decline_task"

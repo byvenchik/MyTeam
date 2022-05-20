@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.settings.ChangeNameFragment">
+    tools:context=".screens.settings.ChangeNameFragment"
+    android:background="@color/whiteMain">
 
     <EditText
         android:id="@+id/settings_input_name"
         style="@style/editText"
         android:hint="@string/settings_hint_input_name"
-        android:inputType="text"
+        android:inputType="textCapWords"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:textColor="@color/receiverTaskListGradientEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +25,9 @@
         android:id="@+id/settings_input_surname"
         style="@style/editText"
         android:hint="@string/sttings_hint_input_surname"
-        android:inputType="text"
+        android:inputType="textCapWords"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:textColor="@color/receiverTaskListGradientEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

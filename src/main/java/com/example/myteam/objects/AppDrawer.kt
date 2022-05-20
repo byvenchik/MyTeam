@@ -17,7 +17,6 @@ import com.example.myteam.screens.group_list.AddContactsFragment
 import com.example.myteam.screens.group_list.GroupListFragment
 import com.example.myteam.screens.task.TaskMainFragment
 import com.example.myteam.screens.task.task_receiver.ReceiverTaskFragment
-import com.example.myteam.screens.task.task_sender.SenderTaskAdapter
 import com.example.myteam.screens.task.task_sender.SenderTaskFragment
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
@@ -80,7 +79,7 @@ class AppDrawer {
 
                 PrimaryDrawerItem().withIdentifier(1)
                     .withIconTintingEnabled(true)
-                    .withName("Моя статистика")
+                    .withName("Статистика")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_analytics),
 
@@ -92,7 +91,7 @@ class AppDrawer {
 
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
-                    .withName("Моя команда")
+                    .withName("Команда")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_groups),
 
@@ -110,7 +109,7 @@ class AppDrawer {
 
                 PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)
-                    .withName("Мои задачи")
+                    .withName("Задачи")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_task),
 
@@ -130,13 +129,13 @@ class AppDrawer {
 
                 PrimaryDrawerItem().withIdentifier(9)
                     .withIconTintingEnabled(true)
-                    .withName("Принятые задачи ТЕСТ")
+                    .withName("Пригласить друзей")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_person_add),
 
                 PrimaryDrawerItem().withIdentifier(10)
                     .withIconTintingEnabled(true)
-                    .withName("Отправленные задачи ТЕСТ")
+                    .withName("Вопросы о приложении")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_help)
 
@@ -159,7 +158,7 @@ class AppDrawer {
             3 -> replaceFragment(GroupListFragment())
             4 -> replaceFragment(AddContactsFragment())
             5 -> replaceFragment(ChoiceContactsForTasksFragment())
-
+            6 -> replaceFragment(TaskMainFragment())
             7 -> replaceFragment(ContactsFragment())
             8 -> replaceFragment(SettingsFragment())
 
@@ -180,10 +179,9 @@ class AppDrawer {
             .withIdentifier(200)
         mHeader = AccountHeaderBuilder()
             .withActivity(APP_ACTIVITY)
-            .withHeaderBackground(R.drawable.header)
+            .withHeaderBackground(R.color.mainColor)
             .addProfiles(
-                mCurrentProfile
-            ).build()
+                mCurrentProfile).build()
     }
 
     //Обновление хедера

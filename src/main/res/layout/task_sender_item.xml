@@ -9,89 +9,164 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bloc_sender_task"
         android:layout_width="match_parent"
-        android:background="@drawable/bg_user_message"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/gradient_tasklist_sender">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/senderTaskContactPhoto"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/senderTaskListGradientEnd"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="@dimen/app_margin"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/default_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
-            android:id="@+id/sender_task_title"
+            android:id="@+id/senderTaskFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Наименование задачи"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/app_small_margin"/>
+            android:textSize="16sp"
+            android:textColor="@color/whiteMain"
+            android:text="Ширшиков Вениамин"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/app_small_margin"
+            app:layout_constraintStart_toEndOf="@id/senderTaskContactPhoto"
+            app:layout_constraintTop_toTopOf="@id/senderTaskContactPhoto"
+            app:layout_constraintBottom_toBottomOf="@id/senderTaskContactPhoto"/>
 
         <TextView
-            android:id="@+id/message_sender_task"
+            android:id="@+id/senderTaskID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:textColor="@color/whiteMain"
+            android:text="id"
+            android:layout_marginStart="@dimen/app_small_margin"
+            app:layout_constraintStart_toEndOf="@id/senderTaskContactPhoto"
+            app:layout_constraintTop_toTopOf="@id/senderTaskContactPhoto"
+            app:layout_constraintBottom_toBottomOf="@id/senderTaskContactPhoto"/>
+
+        <TextView
+            android:id="@+id/photoID"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_small_margin"
+
+            android:text="id"
+            android:textColor="@color/whiteMain"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sender_label_task"
+            app:layout_constraintTop_toTopOf="@id/senderTaskContactPhoto" />
+
+        <TextView
+            android:id="@+id/senderTaskStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textSize="12sp"
+            android:textColor="@color/whiteMain"
+            android:text="Отправлена исполнителю"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/app_small_margin"
+            android:layout_marginEnd="@dimen/app_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/sender_label_task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Еженедельный отчет"
-            android:maxLines="3"
-            android:layout_marginHorizontal="@dimen/app_small_margin"
-            android:textColor="@color/colorBlack"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:text="Название задачи"
+            android:textColor="@color/whiteMain"
+            android:layout_marginHorizontal="@dimen/app_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sender_task_title"/>
+            app:layout_constraintTop_toBottomOf="@id/senderTaskContactPhoto"/>
 
         <TextView
-            android:id="@+id/sender_task_title_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Описание задачи"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/message_sender_task"
-            android:layout_marginStart="@dimen/app_small_margin"/>
-
-        <TextView
-            android:id="@+id/message_sender_description"
+            android:id="@+id/senderTaskNameTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Сделать анализ по всем направлениям деятельности, структурировать, подготовить бумаги и принести мне"
-            android:maxLines="3"
-            android:layout_marginHorizontal="@dimen/app_small_margin"
-            android:textColor="@color/colorBlack"
+            android:maxLines="2"
+            android:layout_marginHorizontal="@dimen/app_margin"
+            android:layout_marginBottom="@dimen/app_small_margin"
+            app:layout_constraintTop_toBottomOf="@id/sender_label_task"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sender_task_title_description"/>
-
-        <TextView
-            android:id="@+id/message_time_sender_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="21:45"
-            android:textColor="@color/colorBlack"
-            android:gravity="end"
-            android:layout_marginEnd="@dimen/app_small_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/sender_task_title"/>
-
-        <TextView
-            android:id="@+id/sender_task_title_received"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Получатель"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/message_sender_description"
-            android:layout_marginStart="@dimen/app_small_margin"/>
-
-        <TextView
-            android:id="@+id/sender_task_received"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Вениамин Ширшиков"
-            android:textColor="@color/micro"
-            app:layout_constraintStart_toEndOf="@id/sender_task_title_received"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="@dimen/app_small_margin"/>
+            android:text="Подготовить отчетность к ежегодной проверке качества обслуживания."
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"/>
+
+        <TextView
+            android:id="@+id/idReceiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="@dimen/app_small_margin"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Подготовить отчет"
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"/>
+
+        <TextView
+            android:id="@+id/senderTaskDescriptionTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="@dimen/app_small_margin"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Подготовить отчет"
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"/>
+
+        <TextView
+            android:id="@+id/senderTaskDate"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22.05.22"
+            android:textColor="@color/whiteMain"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/senderTaskTime"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/senderTaskTime"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:17"
+            android:textColor="@color/whiteMain"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -100,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_marginEnd="100dp"
         android:visibility="gone"
-        android:background="@drawable/bg_receiving_message"
+        android:background="@color/whiteMain"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

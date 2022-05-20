@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screens.contacts.ContactsFragment">
+    tools:context=".screens.contacts.ContactsFragment"
+    android:background="@color/whiteMain">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/add_contacts_recycle_view"
@@ -21,6 +22,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="@dimen/app_margin"
-        android:backgroundTint="@color/green_custom"/>
+        android:backgroundTint="@color/strokeForTask"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

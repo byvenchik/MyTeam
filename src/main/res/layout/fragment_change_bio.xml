@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.settings.ChangeBioFragment">
+    tools:context=".screens.settings.ChangeBioFragment"
+    android:background="@color/whiteMain">
 
     <EditText
         android:id="@+id/settings_input_bio"
         style="@style/editText"
         android:hint="@string/settings_input_bio"
         android:inputType="text"
+        android:textColorHint="@color/receiverTaskListGradientEnd"
+        android:textColor="@color/receiverTaskListGradientEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

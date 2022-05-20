@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_small_margin"
             android:gravity="end"
-            android:textColor="@color/white"
+            android:textColor="@color/whiteMain"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/chat_received_image"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="21:45" />
@@ -61,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/app_small_margin"
             android:gravity="end"
-            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textColor="@color/whiteMain"
             app:layout_constraintBottom_toBottomOf="@+id/chat_user_image"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="21:45" />

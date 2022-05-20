@@ -3,24 +3,26 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/gray_custom"
+    android:background="@color/mainColor"
     android:layout_height="?attr/actionBarSize">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/toolbar_chat_image"
         android:layout_width="@dimen/toolbar_image_width"
         android:layout_height="@dimen/toolbar_image_height"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/mainColor"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/default_photo"
-        app:civ_circle_background_color="@color/white"/>
+        app:civ_circle_background_color="@color/whiteMain"/>
 
     <TextView
         android:id="@+id/toolbar_chat_fullname"
         style="@style/normalText"
         tools:text="Venya Shirshikov"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteMain"
         app:layout_constraintStart_toEndOf="@id/toolbar_chat_image"
         app:layout_constraintTop_toTopOf="@+id/toolbar_chat_image"/>
 

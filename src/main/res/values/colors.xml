@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+
+
+    <color name="whiteMain">#FFFFFFFF</color>
+
+    <color name="senderTaskListGradientStart">#88C3F3</color>
+    <color name="senderTaskListGradientCenter">#81B0F8</color>
+    <color name="senderTaskListGradientEnd">#7CA0F8</color>
+
+    <color name="receiverTaskListGradientStart">#75ECCC</color>
+    <color name="receiverTaskListGradientCenter">#76E3BF</color>
+    <color name="receiverTaskListGradientEnd">#74E0B8</color>
+
+    <color name="mainColor">#232227</color>
+    <color name="material_drawer_primary_dark">#232227</color>  //Рамка
+    <color name="material_drawer_background">#FFFFFFFF</color>  //Меню
+    <color name="material_drawer_primary_text">#232227</color>  //Текст в меню
+    <color name="material_drawer_primary_icon">#74E0B8</color>  //Иконки
+    <color name="material_drawer_divider">#1F000000</color> //Полоска в меню
+    <color name="material_drawer_selected_text">#74E0B8</color> //Номер
+    <color name="material_drawer_selected">#1F000000</color>    //Обводит номер
+
+    <color name="secondMainColor">#2C2E31</color>
+
+
+    <color name="fragmentHeaderMainColor">#826CFF</color>
+    <color name="fragmentHeaderGradientStart">#2775DA</color>
+    <color name="fragmentHeaderGradientEnd">#3282F1</color>
+
+    <color name="toolbarGradientStart">#0e4192</color>
+    <color name="toolbarGradientEnd">#2165C6</color>
+
+
+    <color name="strokeForTask">#7FE1AE</color>
+    <color name="backgroundForTask">#222325</color>
+    <color name="titleForTask">#686869</color>
+
+
+
+
+    <color name="backgroundGradientStart">#6099AD</color>
+    <color name="backgroundGradientCenter">#567AF3</color>
+    <color name="backgroundGradientEnd">#6992BD</color>
+
+
+
+    <color name="decorGradientStart">#6EE2F5</color>
+    <color name="decorGradientEnd">#6454F0</color>
+
+    <!--Custom messages from USER-->
+    <color name="gradientStart">#6D82E7</color>
+    <color name="gradientCenter">#9175E7</color>
+    <color name="gradientEnd">#A470E7</color>
+    <!--Custom messages from Companion-->
+    <color name="mainColorReceivedCompanion">#FFFFFF</color>
+    <color name="shadowColorReceivedCompanion">#EBEBEB</color>
+    <!--Text messages-->
+    <color name="textMessageAccept">#FF000000</color>
+    <color name="textMessageAcceptTime">#3C000000</color>
+    <!--Background chats-->
+    <color name="chatBackground">#FBFCFC</color>
+    <color name="inputText">#D5F8F8F8</color>
+
+
+
+
+    <color name="toolbar">#5F64B8</color>
+    <color name="messageUser">#567AF3</color>
+
+
     <color name="purple_200">#303134</color>
     <color name="purple_500">#303134</color>
     <color name="purple_700">#303134</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="colorBlack">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
     <color name="whiteDark">#D3D3D3</color>
 
     <color name="colorGreen">#4CAF50</color>
@@ -26,32 +97,32 @@
 
 
 
-    <color name="green_custom">#1AD490</color>
+    <color name="green_custom">#6D82E7</color>
     <color name="gray_custom">#303134</color>
     <color name="light_gray_custom">#343539</color>
 
-    <color name="material_drawer_primary_dark">#303134</color>  //Рамка
+
 
 
     <!-- Material DEFAULT colors -->
     <color name="material_drawer_primary">#2196F3</color>
     <color name="material_drawer_primary_light">#BBDEFB</color>
-    <color name="material_drawer_accent">#1AD490</color>
+    <color name="material_drawer_accent">#6D82E7</color>
 
     <!-- OVERWRITE THESE COLORS FOR A LIGHT THEME -->
     <!-- MaterialDrawer DEFAULT colors -->
-    <color name="material_drawer_background">#F9F9F9</color>
+
     <!-- Material DEFAULT text / items colors -->
-    <color name="material_drawer_primary_text">#DE000000</color>
-    <color name="material_drawer_primary_icon">#1AD490</color>
+
+
     <color name="material_drawer_secondary_text">#8A000000</color>
     <color name="material_drawer_hint_text">#42000000</color>
-    <color name="material_drawer_divider">#1F000000</color> //Полоска в меню
+
     <!-- Material DEFAULT drawer colors -->
-    <color name="material_drawer_selected">#1F000000</color>    //Обводит номер
+
     <color name="material_drawer_selected_legacy">#E8E8E8</color>
-    <color name="material_drawer_selected_text">#1AD490</color>
-    <color name="material_drawer_header_selection_text">@color/white</color>
+
+    <color name="material_drawer_header_selection_text">@color/whiteMain</color>
     <color name="material_drawer_header_selection_subtext">@color/whiteDark</color>
 
     <!--MY COLORS-->

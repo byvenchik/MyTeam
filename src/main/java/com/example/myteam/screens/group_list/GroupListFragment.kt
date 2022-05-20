@@ -48,7 +48,7 @@ class GroupListFragment : Fragment(R.layout.fragment_group_list) {
                                 val tempList = dataSnapshot2.children.map { it.getCommonModel() }
 
                                 if (tempList.isEmpty()) {
-                                    newModel.lastMessage = "История сообщений была удалена"
+                                    newModel.lastMessage = "Сообщений пока нет. Начните общение!"
                                 } else {
                                     newModel.lastMessage = tempList[0].text
                                 }

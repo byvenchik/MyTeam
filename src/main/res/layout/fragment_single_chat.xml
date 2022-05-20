@@ -25,7 +25,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_recycle_view"
-                android:background="@color/white"
+                android:background="@color/whiteMain"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
 
@@ -38,12 +38,12 @@
             android:id="@+id/chat_input_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/gray_custom"
+            android:background="@color/inputText"
             android:hint="Сообщение"
             android:padding="@dimen/appPadding"
             android:inputType="textCapSentences"
-            android:textColor="@color/white"
-            android:textColorHint="@color/whiteDark"
+            android:textColor="@color/textMessageAccept"
+            android:textColorHint="@color/textMessageAcceptTime"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/chat_btn_send_message"
             app:layout_constraintStart_toStartOf="parent" />
@@ -52,7 +52,7 @@
             android:id="@+id/chat_btn_send_message"
             android:layout_width="50dp"
             android:layout_height="0dp"
-            android:background="@color/gray_custom"
+            android:background="@color/inputText"
             android:padding="@dimen/appPadding"
             android:src="@drawable/ic_send"
             android:visibility="gone"
@@ -66,7 +66,7 @@
             android:layout_height="0dp"
             android:padding="@dimen/appPadding"
             android:src="@drawable/ic_attach"
-            android:background="@color/gray_custom"
+            android:background="@color/inputText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/chat_btn_voice"
             app:layout_constraintTop_toTopOf="@+id/chat_input_message" />
@@ -77,7 +77,7 @@
             android:layout_height="0dp"
             android:padding="@dimen/appPadding"
             android:src="@drawable/ic_voice"
-            android:background="@color/gray_custom"
+            android:background="@color/inputText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/chat_input_message" />

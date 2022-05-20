@@ -105,6 +105,12 @@ fun String.asTime(): String {
     return timeFormat.format(time)
 }
 
+fun String.asDate(): String {
+    val time = Date(this.toLong())
+    val timeFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+    return timeFormat.format(time)
+}
+
 //Функция для получения uri загружаемого файла
 fun getFilenameFromUri(uri: Uri): String {
     var result = ""

@@ -7,51 +7,181 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bloc_receiver_sender_task"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="100dp"
-        android:background="@drawable/bg_user_message"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/bloc_receiver_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/gradient_tasklist_receiver">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/receiverTaskContactPhoto"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/receiverTaskListGradientEnd"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="@dimen/app_margin"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/default_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
-            android:id="@+id/receiver_message_sender_task"
-            android:layout_width="match_parent"
+            android:id="@+id/receiverTaskFullName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Привет я Юра"
-            android:textColor="@color/colorBlack"
-            android:gravity="end"
-            android:padding="@dimen/appPadding"
+            android:textSize="16sp"
+            android:textColor="@color/whiteMain"
+            android:text="Ширшиков Вениамин"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/app_small_margin"
+            app:layout_constraintStart_toEndOf="@id/receiverTaskContactPhoto"
+            app:layout_constraintTop_toTopOf="@id/receiverTaskContactPhoto"
+            app:layout_constraintBottom_toBottomOf="@id/receiverTaskContactPhoto"/>
+
+        <TextView
+            android:id="@+id/receiverTaskID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:textColor="@color/whiteMain"
+            android:text="id"
+            android:layout_marginStart="@dimen/app_small_margin"
+            app:layout_constraintStart_toEndOf="@id/receiverTaskContactPhoto"
+            app:layout_constraintTop_toTopOf="@id/receiverTaskContactPhoto"
+            app:layout_constraintBottom_toBottomOf="@id/receiverTaskContactPhoto"/>
+
+        <TextView
+            android:id="@+id/receiverphotoID"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_small_margin"
+            android:text="id"
+            android:textColor="@color/whiteMain"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/receiver_label_task"
+            app:layout_constraintTop_toTopOf="@id/receiverTaskContactPhoto" />
+
+        <TextView
+            android:id="@+id/receiverTaskStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textSize="12sp"
+            android:textColor="@color/whiteMain"
+            android:text="Отправлена исполнителю"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/app_small_margin"
+            android:layout_marginEnd="@dimen/app_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/receiver_message_time_sender_task"
+            android:id="@+id/receiver_label_task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="21:45"
-            android:textColor="@color/colorBlack"
-            android:gravity="end"
-            android:layout_marginEnd="@dimen/app_small_margin"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:text="Название задачи"
+            android:textColor="@color/whiteMain"
+            android:layout_marginHorizontal="@dimen/app_margin"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/receiver_message_sender_task"/>
+            app:layout_constraintTop_toBottomOf="@id/receiverTaskContactPhoto"/>
+
+        <TextView
+            android:id="@+id/receiverTaskNameTask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_marginHorizontal="@dimen/app_margin"
+            android:layout_marginBottom="@dimen/app_small_margin"
+            app:layout_constraintTop_toBottomOf="@id/receiver_label_task"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Подготовить отчетность к ежегодной проверке качества обслуживания."
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"/>
+
+        <TextView
+            android:id="@+id/receiverTaskDescriptionTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="@dimen/app_small_margin"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Подготовить отчет"
+            android:textSize="14sp"
+            android:textColor="@color/whiteMain"/>
+
+        <TextView
+            android:id="@+id/receiverTaskDate"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22.05.22"
+            android:textColor="@color/whiteMain"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/receiverTaskTime"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/receiverTaskTime"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:17"
+            android:textColor="@color/whiteMain"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/idSender"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:17"
+            android:textColor="@color/whiteMain"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/app_small_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bloc_receiver_received_task"
+        android:id="@+id/bloc_fake_message"
         android:layout_width="wrap_content"
         android:layout_marginEnd="100dp"
-        android:background="@drawable/bg_receiving_message"
+        android:visibility="gone"
+        android:background="@color/whiteMain"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/receiver_message_receiver_task"
+            android:id="@+id/chat_fake_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Привет я Юра"
@@ -62,7 +192,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/receiver_message_time_receiver_task"
+            android:id="@+id/chat_fake_message_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="21:45"
@@ -70,7 +200,7 @@
             android:gravity="end"
             android:layout_marginEnd="@dimen/app_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/receiver_message_receiver_task"/>
+            app:layout_constraintTop_toBottomOf="@+id/chat_fake_message"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

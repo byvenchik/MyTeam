@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     style="@style/settingsButtons"
     android:layout_margin="@dimen/app_margin"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/whiteMain">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contact_photo"
         android:layout_width="@dimen/settings_user_photo_width"
         android:layout_height="@dimen/settings_user_photo_height"
+        app:civ_border_color="@color/mainColor"
+        app:civ_border_width="1dp"
         android:src="@drawable/default_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,12 +22,14 @@
     <TextView
         android:id="@+id/contact_fullname"
         style="@style/normalText"
+        android:textColor="@color/mainColor"
         tools:text="Venya Shirshikov"
         app:layout_constraintStart_toEndOf="@id/contact_photo"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/contact_status"
+        android:textColor="@color/receiverTaskListGradientEnd"
         style = "@style/smallText"
         tools:text="в сети"
         app:layout_constraintStart_toEndOf="@id/contact_photo"
