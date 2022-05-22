@@ -27,7 +27,6 @@ class CreateGroupFragment(private var listContacts: List<CommonModel>) :
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Создать команду"
         initRecyclerView()
         create_group_photo.setOnClickListener { addPhoto() }
         create_group_btn_complete.setOnClickListener {
@@ -36,6 +35,7 @@ class CreateGroupFragment(private var listContacts: List<CommonModel>) :
                 showToast("Введите название команды")
             } else {
                 createGroupToDatabase(nameGroup,mUri,listContacts){
+                    hideKeyboard()
                     replaceFragment(GroupListFragment())
                 }
             }
@@ -55,6 +55,7 @@ class CreateGroupFragment(private var listContacts: List<CommonModel>) :
     }
 
     private fun initRecyclerView() {
+        APP_ACTIVITY.title = "Создать команду"
         mRecyclerView = create_group_recycle_view
         mAdapter = AddContactsAdapter()
         mRecyclerView.adapter = mAdapter

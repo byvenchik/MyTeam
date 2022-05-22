@@ -193,6 +193,7 @@
         app:layout_constraintTop_toBottomOf="@id/statistics_label_not_get_completed" />
 
     <View
+        android:id="@+id/separator_past"
         style="@style/separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -209,8 +210,8 @@
         android:layout_marginStart="@dimen/app_margin"
         app:layout_constraintStart_toEndOf="@+id/statistics_label_completed"
         app:layout_constraintTop_toTopOf="@+id/statistics_label_completed"
-        android:hint="Отсутствуют"
-        android:text="Отсутствуют"/>
+        android:hint="0"
+        android:text="0"/>
 
     <TextView
         android:id="@+id/count_not_complete_task"
@@ -223,8 +224,8 @@
         android:layout_marginStart="@dimen/app_margin"
         app:layout_constraintStart_toEndOf="@+id/statistics_label_not_completed"
         app:layout_constraintTop_toTopOf="@+id/statistics_label_not_completed"
-        android:hint="Отсутствуют"
-        android:text="Отсутствуют"/>
+        android:hint="0"
+        android:text="0"/>
 
     <TextView
         android:id="@+id/count_decline_task"
@@ -237,8 +238,8 @@
         android:layout_marginStart="@dimen/app_margin"
         app:layout_constraintStart_toEndOf="@+id/statistics_label_decline_task"
         app:layout_constraintTop_toTopOf="@+id/statistics_label_decline_task"
-        android:hint="Отсутствует"
-        android:text="Отсутствует"/>
+        android:hint="0"
+        android:text="0"/>
 
     <TextView
         android:id="@+id/count_get_complete_task"
@@ -251,8 +252,8 @@
         android:layout_marginStart="@dimen/app_margin"
         app:layout_constraintStart_toEndOf="@+id/statistics_label_get_completed"
         app:layout_constraintTop_toTopOf="@+id/statistics_label_get_completed"
-        android:hint="Отсутствуют"
-        android:text="Отсутствуют"/>
+        android:hint="0"
+        android:text="0"/>
 
     <TextView
         android:id="@+id/count_not_get_complete_task"
@@ -265,8 +266,8 @@
         android:layout_marginStart="@dimen/app_margin"
         app:layout_constraintStart_toEndOf="@+id/statistics_label_not_get_completed"
         app:layout_constraintTop_toTopOf="@+id/statistics_label_not_get_completed"
-        android:hint="Отсутствуют"
-        android:text="Отсутствуют"/>
+        android:hint="0"
+        android:text="0"/>
 
     <TextView
         android:id="@+id/count_decline_get_task"
@@ -279,8 +280,32 @@
         android:layout_marginStart="@dimen/app_margin"
         app:layout_constraintStart_toEndOf="@+id/statistics_label_get_decline"
         app:layout_constraintTop_toTopOf="@+id/statistics_label_get_decline"
-        android:hint="Отсутствует"
-        android:text="Отсутствует"/>
+        android:hint="0"
+        android:text="0"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_show_chart"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_margin"
+        android:backgroundTint="@color/receiverTaskListGradientEnd"
+        android:src="@drawable/ic_show"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+        android:id="@+id/aa_chart_view"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator_past">
+
+    </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

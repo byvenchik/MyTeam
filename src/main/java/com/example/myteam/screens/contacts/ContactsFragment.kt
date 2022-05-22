@@ -42,6 +42,7 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts) {
         super.onResume()
         APP_ACTIVITY.mAppDrawer.enableDrawer()
         APP_ACTIVITY.title = "Контакты"
+        hideKeyboard()
         initRecycleView()
     }
 

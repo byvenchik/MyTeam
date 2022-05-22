@@ -14,7 +14,7 @@ class TaskMainFragment : Fragment(R.layout.fragment_task_main) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Мои задачи"
+        APP_ACTIVITY.title = "Задачи"
         goPager()
     }
 

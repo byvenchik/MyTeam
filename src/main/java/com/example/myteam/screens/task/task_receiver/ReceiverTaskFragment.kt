@@ -21,7 +21,6 @@ class ReceiverTaskFragment()  : Fragment(R.layout.fragment_task_receiver) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Входящие задачи"
         initRecycleView()
     }
 

@@ -53,10 +53,9 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 initContacts()
             }
-
             replaceFragment(StatisticsFragment(), false)
         } else {
-            replaceFragment(EnterPhoneNumberFragment(),false)
+            replaceFragment(EnterPhoneNumberFragment(), false)
         }
     }
 

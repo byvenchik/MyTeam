@@ -6,10 +6,7 @@ import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.models.CommonModel
 import com.example.myteam.screens.base.BaseFragment
-import com.example.myteam.utilits.APP_ACTIVITY
-import com.example.myteam.utilits.AppValueEventListener
-import com.example.myteam.utilits.TYPE_CHAT
-import com.example.myteam.utilits.TYPE_GROUP
+import com.example.myteam.utilits.*
 import kotlinx.android.synthetic.main.fragment_chat_list.*
 
 class ChatListFragment : Fragment(R.layout.fragment_chat_list) {
@@ -25,6 +22,7 @@ class ChatListFragment : Fragment(R.layout.fragment_chat_list) {
         super.onResume()
         APP_ACTIVITY.mAppDrawer.enableDrawer()
         APP_ACTIVITY.title = "Личные сообщения"
+        hideKeyboard()
         initRecyclerView()
     }
 

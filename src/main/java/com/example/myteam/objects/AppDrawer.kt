@@ -161,12 +161,6 @@ class AppDrawer {
             6 -> replaceFragment(TaskMainFragment())
             7 -> replaceFragment(ContactsFragment())
             8 -> replaceFragment(SettingsFragment())
-
-            10 -> replaceFragment(ReceiverTaskFragment())
-            11 -> replaceFragment(SenderTaskFragment())
-
-
-
         }
     }
 

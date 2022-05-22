@@ -6,6 +6,7 @@ import com.example.myteam.database.*
 import com.example.myteam.models.CommonModel
 import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.downloadAndSetImage
+import com.example.myteam.utilits.hideKeyboard
 import com.example.myteam.utilits.replaceFragment
 import com.example.myteam.utilits.showToast
 import com.google.firebase.database.DatabaseReference
@@ -30,6 +31,7 @@ class GetTaskFragment(private val contact: CommonModel) : Fragment(R.layout.frag
         task_received_status.text = contact.state
 
         add_task_btn.setOnClickListener {
+            hideKeyboard()
             checkValue()
         }
     }

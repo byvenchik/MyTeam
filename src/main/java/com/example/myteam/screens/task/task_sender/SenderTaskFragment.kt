@@ -21,7 +21,6 @@ class SenderTaskFragment : Fragment(R.layout.fragment_task_sender) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Отправленные задачи"
         initRecycleView()
         APP_ACTIVITY.mAppDrawer.enableDrawer()
     }

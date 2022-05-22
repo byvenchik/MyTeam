@@ -9,6 +9,7 @@ import com.example.myteam.screens.base.BaseFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.AppValueEventListener
 import com.example.myteam.utilits.TYPE_GROUP
+import com.example.myteam.utilits.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_chat_list.*
 import kotlinx.android.synthetic.main.fragment_group_list.*
 
@@ -23,7 +24,8 @@ class GroupListFragment : Fragment(R.layout.fragment_group_list) {
     override fun onResume() {
         super.onResume()
         APP_ACTIVITY.mAppDrawer.enableDrawer()
-        APP_ACTIVITY.title = "Моя команда"
+        APP_ACTIVITY.title = "Команда"
+        hideKeyboard()
         initRecyclerView()
     }
 

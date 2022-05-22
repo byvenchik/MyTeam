@@ -23,6 +23,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         APP_ACTIVITY.mAppDrawer.enableDrawer()
         APP_ACTIVITY.title = "Настройки профиля"
         setHasOptionsMenu(true)
+        hideKeyboard()
         initFields()
     }
 

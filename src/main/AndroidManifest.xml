@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTeam">
         <activity
+            android:name=".screens.main.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screens.main.ChartActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.MainTaskActivity"
             android:exported="false" />
         <activity
