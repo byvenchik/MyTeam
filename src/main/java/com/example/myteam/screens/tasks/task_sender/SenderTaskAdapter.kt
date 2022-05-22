@@ -1,4 +1,4 @@
-package com.example.myteam.screens.task.task_sender
+package com.example.myteam.screens.tasks.task_sender
 
 import android.view.LayoutInflater
 import android.view.View

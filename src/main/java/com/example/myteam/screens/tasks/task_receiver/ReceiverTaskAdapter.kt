@@ -1,17 +1,14 @@
-package com.example.myteam.screens.task.task_receiver
+package com.example.myteam.screens.tasks.task_receiver
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.CURRENT_UID
 import com.example.myteam.models.CommonModel
-import com.example.myteam.screens.task.task_sender.DetailsSenderFragment
 import com.example.myteam.utilits.asDate
 import com.example.myteam.utilits.asTime
 import com.example.myteam.utilits.downloadAndSetImage

@@ -1,4 +1,4 @@
-package com.example.myteam.screens.get_tasks
+package com.example.myteam.screens.tasks.get_tasks
 
 import androidx.fragment.app.Fragment
 import com.example.myteam.R
@@ -11,7 +11,6 @@ import com.example.myteam.utilits.replaceFragment
 import com.example.myteam.utilits.showToast
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ServerValue
-import kotlinx.android.synthetic.main.contact_item.*
 import kotlinx.android.synthetic.main.fragment_get_task.*
 
 class GetTaskFragment(private val contact: CommonModel) : Fragment(R.layout.fragment_get_task) {
@@ -32,7 +31,7 @@ class GetTaskFragment(private val contact: CommonModel) : Fragment(R.layout.frag
 
         add_task_btn.setOnClickListener {
             hideKeyboard()
-            checkValue()
+                checkValue()
         }
     }
 

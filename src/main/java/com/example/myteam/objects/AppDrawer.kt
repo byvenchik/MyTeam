@@ -10,14 +10,12 @@ import com.example.myteam.screens.contacts.ContactsFragment
 import com.example.myteam.screens.settings.SettingsFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.database.USER
-import com.example.myteam.screens.main.StatisticsFragment
+import com.example.myteam.screens.statistics.StatisticsFragment
 import com.example.myteam.screens.chat_list.ChatListFragment
-import com.example.myteam.screens.get_tasks.ChoiceContactsForTasksFragment
+import com.example.myteam.screens.tasks.get_tasks.ChoiceContactsForTasksFragment
 import com.example.myteam.screens.group_list.AddContactsFragment
 import com.example.myteam.screens.group_list.GroupListFragment
-import com.example.myteam.screens.task.TaskMainFragment
-import com.example.myteam.screens.task.task_receiver.ReceiverTaskFragment
-import com.example.myteam.screens.task.task_sender.SenderTaskFragment
+import com.example.myteam.screens.tasks.TaskMainFragment
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader

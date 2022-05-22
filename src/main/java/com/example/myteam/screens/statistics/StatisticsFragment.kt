@@ -1,34 +1,16 @@
-package com.example.myteam.screens.main
+package com.example.myteam.screens.statistics
 
-import android.graphics.Color
-import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.alpha
-import androidx.core.graphics.luminance
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myteam.R
 import com.example.myteam.database.*
-import com.example.myteam.models.CommonModel
-import com.example.myteam.models.UserModel
 import com.example.myteam.utilits.*
 import com.github.aachartmodel.aainfographics.aachartcreator.*
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
-import com.github.mikephil.charting.buffer.BarBuffer
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.coroutines.yield
-import kotlin.math.absoluteValue
-import kotlin.math.sign
-import kotlin.math.ulp
-import kotlin.time.days
 
 //Главный фрагмент
 class StatisticsFragment : Fragment(R.layout.fragment_main) {
@@ -58,7 +40,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_main) {
         statistics_user_photo.downloadAndSetImage(USER.photoUrl)
         statistics_fullname.text = USER.fullname
     }
-    
+
     private fun initStatistics() {
         mRefStatistics.child(CHILD_PROGRESS_TASK).get().addOnSuccessListener {
             if (it.value != null) {

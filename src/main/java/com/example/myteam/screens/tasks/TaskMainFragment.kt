@@ -1,4 +1,4 @@
-package com.example.myteam.screens.task
+package com.example.myteam.screens.tasks
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager

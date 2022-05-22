@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.task.task_receiver.ReceiverTaskFragment">
+    tools:context=".screens.tasks.task_receiver.ReceiverTaskFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/receiver_task_recycle_view"

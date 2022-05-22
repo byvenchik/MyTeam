@@ -1,23 +1,15 @@
-package com.example.myteam.screens.task.task_sender
+package com.example.myteam.screens.tasks.task_sender
 
-import android.util.Log
 import android.view.View
-import android.widget.TextView
-import androidx.core.text.isDigitsOnly
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.screens.base.BaseFragment
-import com.example.myteam.screens.task.TaskMainFragment
+import com.example.myteam.screens.tasks.TaskMainFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment
 import com.example.myteam.utilits.showToast
-import com.google.android.gms.tasks.Task
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ServerValue
-import com.google.firebase.database.snapshot.EmptyNode
 import kotlinx.android.synthetic.main.fragment_details_sender.*
-import kotlin.coroutines.EmptyCoroutineContext.plus
 
 class DetailsSenderFragment(
     val task_id: String,

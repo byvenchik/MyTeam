@@ -1,9 +1,9 @@
-package com.example.myteam.screens.task.task_receiver
+package com.example.myteam.screens.tasks.task_receiver
 
 import com.example.myteam.R
 import com.example.myteam.database.*
 import com.example.myteam.screens.base.BaseFragment
-import com.example.myteam.screens.task.TaskMainFragment
+import com.example.myteam.screens.tasks.TaskMainFragment
 import com.example.myteam.utilits.APP_ACTIVITY
 import com.example.myteam.utilits.downloadAndSetImage
 import com.example.myteam.utilits.replaceFragment

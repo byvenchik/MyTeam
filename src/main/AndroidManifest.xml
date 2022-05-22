@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTeam">
         <activity
-            android:name=".screens.main.TestActivity"
+            android:name=".screens.statistics.TestActivity"
             android:exported="false" />
         <activity
-            android:name=".screens.main.ChartActivity"
+            android:name=".screens.statistics.ChartActivity"
             android:exported="false" />
         <activity
             android:name=".screens.MainTaskActivity"

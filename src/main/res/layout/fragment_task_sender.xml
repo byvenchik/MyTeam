@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screens.task.task_sender.SenderTaskFragment">
+    tools:context=".screens.tasks.task_sender.SenderTaskFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sender_task_recycle_view"
